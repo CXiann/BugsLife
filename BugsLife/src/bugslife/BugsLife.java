@@ -1,6 +1,5 @@
 package bugslife;
 
-import assignmentnew.CommandLineTable;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
@@ -88,9 +87,10 @@ public class BugsLife {
     private static void serialize(Project pro) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd kk:mm:ss").create();
         String json = gson.toJson(pro);
+        String path = "data.json";
 
         try {
-            FileWriter writer = new FileWriter("C:\\Users\\User\\Documents\\NetBeansProjects\\AssignmentNew\\data.json");
+            FileWriter writer = new FileWriter(path);
             writer.write(json);
             writer.close();
         } catch (IOException ex) {

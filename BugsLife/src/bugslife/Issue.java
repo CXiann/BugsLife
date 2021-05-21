@@ -1,6 +1,5 @@
 package bugslife;
 
-import assignmentnew.CommandLineTable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

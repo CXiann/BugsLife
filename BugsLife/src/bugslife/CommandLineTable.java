@@ -1,4 +1,4 @@
-package assignmentnew;
+package bugslife;
 
 import java.util.ArrayList;
 import java.util.Arrays;
