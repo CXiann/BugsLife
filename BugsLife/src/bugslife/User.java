@@ -1,10 +1,9 @@
 
 package bugslife;
 
-
 public class User {
-    private static int userCount = 0;
-    private int userid;
+    private transient static int userCount = 0;
+    private Integer userid;
     private String username;
     private String password;
 

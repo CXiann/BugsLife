@@ -8,34 +8,34 @@ import java.util.List;
 
 public class Comment {
 
-    private String commentUser;
-    protected String commentText;
-    private int commentID;
-    private static int commentCount = 0;
+    protected transient static int commentCount = 0;
+    private int commentId;
+    protected String text;
+    private List<React> react = new ArrayList<>(Arrays.asList(new React("angry"), new React("happy"), new React("thumbsUp"), new React("smile")));
+    private Date timestamp;
+    private String user;
 //    private SimpleDateFormat ft;
-    private Date timestampComment;
-    private List<Reaction> reaction = new ArrayList<>(Arrays.asList(new Reaction("Angry"), new Reaction("Happy"), new Reaction("Smile")));
 
-    public Comment(String commentUser, String commentText) {
-        this.commentText = commentText;
-        this.commentUser = commentUser;
-        this.commentID = commentID;
-        this.timestampComment = new Date();
+    public Comment(String user, String text) {
+        this.text = text;
+        this.user = user;
+        this.commentId = commentId;
+        this.timestamp = new Date();
         commentCount++;
-        commentID = commentCount;
+        commentId = commentCount;
     }
 
     public void increaseReactionCount(String s) {
         int index = getIndex(s);
-        Reaction r = reaction.get(index);
+        React r = react.get(index);
         r.increaseCount();
     }
 
     public String getAllReactionsData() {
         String s = "$$\n";
-        for (int i = 0; i < reaction.size(); i++) {
-            if (reaction.get(i).getReactionNum() != 0) {
-                s += reaction.get(i).getReactionNum() + " people react with " + reaction.get(i).getReactionName() + "\n";
+        for (int i = 0; i < react.size(); i++) {
+            if (react.get(i).getCount() != 0) {
+                s += react.get(i).getCount() + " people react with " + react.get(i).getReaction() + "\n";
             }
         }
         return s;
@@ -44,30 +44,36 @@ public class Comment {
     public int getIndex(String s) {
         int index = 0;
         switch (s) {
-            case "Angry" :
+            case "angry" :
                 index = 0;
-            case "Happy" :
+                break;
+            case "happy" :
                 index = 1;
-            case "Smile" :
+                break;
+            case "thumbsUp" :
                 index = 2;
+                break;
+            case "smile" :
+                index = 3;
+                break;
         }
         return index;
     }
 
-    public String getCommentText() {
-        return commentText;
+    public String getText() {
+        return text;
     }
 
-    public String getCommentUser() {
-        return commentUser;
+    public String getUser() {
+        return user;
     }
 
-    public int getCommentID() {
-        return commentID;
+    public int getCommentId() {
+        return commentId;
     }
     
     public Date getTimestamp(){
-        return timestampComment;
+        return timestamp;
     }
     
     /** Changed **
@@ -78,8 +84,8 @@ public class Comment {
     */
     
     public String toString() {
-        String s = "#" + this.getCommentID() + "\tCreated on: " + this.getTimestamp() + "\tBy: " + this.getCommentUser() + "\n"
-                + this.getCommentText() + "\n"
+        String s = "#" + this.getCommentId() + "\tCreated on: " + this.getTimestamp() + "\tBy: " + this.getUser() + "\n"
+                + this.getText() + "\n"
                 + this.getAllReactionsData() + "\n";
         return s;
 
@@ -88,14 +94,14 @@ public class Comment {
     /*    
     public String getReactionType(String s) {
         int index = getIndex(s);
-        Reaction r = reaction.get(index);
-        return r.getReactionName();
+        React r = reaction.get(index);
+        return r.getReaction();
     }
 
     public int getReactionCount(String s) {
         int index = getIndex(s);
-        Reaction r = reaction.get(index);
-        return r.getReactionNum();
+        React r = reaction.get(index);
+        return r.getCount();
     }
 
     

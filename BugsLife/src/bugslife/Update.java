@@ -5,41 +5,52 @@ import java.util.Date;
 
 
 public class Update {
-    private String commentU;
-    private String statusU;
-    private String titleU;
-    private Date time;
-    private String statusB;
-    private String projectNameU;
-    private char c;
-    private int commentIdU;
+    private transient char c;
+    protected transient static int updateCount = 0;
     private int updateNumber;
-    private static int updateCount = 0;
+    private String projectNameU;
+    private String titleU;
+    private String commentTitleCreatedU;
+    private String commentUserCreatedU;
+    private String commentU;
+    private int commentIdU;
+    private String statusBefore;
+    private String statusU;
+    private Date timeU;
 
     public Update(int commentIdU, String commentU, Date time) {    //update comment
         this.commentU = commentU;
         this.commentIdU = ++commentIdU;
-        this.time = time;
+        this.timeU = time;
         updateNumber = ++updateCount;
     }
 
+    public Update(String commentTitleCreatedU, String commentUserCreatedU, Date timeU, char c) {       //create comment
+        this.c = c;
+        this.commentTitleCreatedU = commentTitleCreatedU;
+        this.commentUserCreatedU = commentUserCreatedU;
+        this.timeU = timeU;
+        updateNumber = ++updateCount;
+    }
+
+    
     public Update(String titleU, Date time, char c) {  //creating issue
         this.titleU = titleU;
         this.c = c;
-        this.time = time;
+        this.timeU = time;
         updateNumber = ++updateCount;
     }
 
     public Update(String projectNameU, Date time) {   //creating project
-        this.time = time;
+        this.timeU = time;
         this.projectNameU = projectNameU;
         updateNumber = ++updateCount;
     }
 
     public Update(String statusB, String statusU, Date time) {    //update status
         this.statusU = statusU;
-        this.time = time;
-        this.statusB = statusB;
+        this.timeU = time;
+        this.statusBefore = statusB;
         updateNumber = ++updateCount;
     }
 
@@ -51,12 +62,20 @@ public class Update {
         return updateNumber;
     }
 
-    public Date getTime() {
-        return time;
+    public Date getTimeU() {
+        return timeU;
     }
 
-    public String getStatusB() {
-        return statusB;
+    public String getStatusBefore() {
+        return statusBefore;
+    }
+
+    public String getCommentTitleCreatedU() {
+        return commentTitleCreatedU;
+    }
+
+    public String getCommentUserCreatedU() {
+        return commentUserCreatedU;
     }
 
     public String getTitleU() {

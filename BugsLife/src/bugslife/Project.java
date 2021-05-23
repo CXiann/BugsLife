@@ -13,42 +13,43 @@ import java.util.regex.Pattern;
 
 public class Project {
 
-    private static Integer projectCount = 0;
-    private Integer projectId;
-    private String projectName;
+    protected transient static Integer projectCount = 0;
+    private Integer id;
+    private String name;
+    ArrayList<Issue> issues = new ArrayList<>();
     private Date projectTime;
-//    private SimpleDateFormat ft; --> Date, set at gson
-    ArrayList<Issue> issueList = new ArrayList<>();
+    //private transient SimpleDateFormat ft; 
     //ArrayList<Update> history = new ArrayList<>();                              
     //dunno how to implement update for creating project(diif. class)           
 
     public Project(String projectName) {
-        this.projectName = projectName;
-        projectId = ++projectCount;
+        this.name = projectName;
+        id = ++projectCount;
         projectTime = new Date();
-        //history.add(new Update(projectName, this.getProjectTime()));
+        //history.add(new Update(name, this.getProjectTime()));
     }
 
     public void createIssue(String issueTitle, String issueDescrip, String tag, int priority, String status, String creatorUser, String assigneeUser) {
-        issueList.add(new Issue(issueTitle, issueDescrip, tag, priority, status, creatorUser, assigneeUser));
+        Update.updateCount = 0; //reset static updateCount before creating new issue
+        issues.add(new Issue(issueTitle, issueDescrip, tag, priority, status, creatorUser, assigneeUser));
     }
 
 //    public void printAllProjects() {
-//        System.out.println(this.getProjectId() + "\t\t" + this.getProjectName() + "\t\t" + this.issueList.size() + "\n");
+//        System.out.println(this.getProjectId() + "\t\t" + this.getProjectName() + "\t\t" + this.issues.size() + "\n");
 //    }
 //    public void printAllIssues() {
-//        for (Issue i : issueList) {
+//        for (Issue i : issues) {
 //            i.printSingleIssue();
 //        }
 //    }
     public String[] printAllProjects() {
-        String str = this.getProjectId() + "," + this.getProjectName() + "," + this.issueList.size();
+        String str = this.getProjectId() + "," + this.getName() + "," + this.issues.size();
         String[] print = str.split(",", 0);
         return print;
     }
 
 //    public void printAllIssues() {
-//        for (Issue i : issueList) {
+//        for (Issue i : issues) {
 //            i.printSingleIssue();
 //        }
 //    }
@@ -61,9 +62,9 @@ public class Project {
      */
     public List<Issue> searchIssue(String searchString) {
         List<Issue> match = new ArrayList<>();
-        for (Issue i : issueList) {
-            if (isContain(i.getIssueTitle(), searchString) || isContain(i.getIssueDescrip(), searchString)
-                    || isCommentContain(i.getListComment(), searchString)) {
+        for (Issue i : issues) {
+            if (isContain(i.getTitle(), searchString) || isContain(i.getDescriptionText(), searchString)
+                    || isCommentContain(i.getComments(), searchString)) {
                 match.add(i);
             }
         }
@@ -71,15 +72,15 @@ public class Project {
     }
 
     /**
-     * sort issue according to criteria in String only sorted for display(no
-     * changes on the actual position in issueList)
+     * sort issues according to criteria in String only sorted for display(no
+ changes on the actual position in issues)
      *
      * @param sortType criteria to sort
      */
     
     public void sortIssue(String sortType) {
-        issueList.get(0).sortType = sortType;                    //sortType is static and is created for determining which statement to use in compareTo() 
-        PriorityQueue<Issue> p = new PriorityQueue(issueList);   //create temporary PriorityQueue to automatically sort according to criteria               
+        issues.get(0).sortType = sortType;                    //sortType is static and is created for determining which statement to use in compareTo() 
+        PriorityQueue<Issue> p = new PriorityQueue(issues);   //create temporary PriorityQueue to automatically sort according to criteria               
         while (!p.isEmpty()) {
             p.poll().printSingleIssue();                         //remove head element from the PriorityQueue(already sorted) and print it one by one until empty
         }
@@ -87,7 +88,7 @@ public class Project {
      
     private boolean isCommentContain(ArrayList<Comment> comment, String searchString) {   //to check for exact string in an ArrayList<Comment>(local method)
         for (Comment c : comment) {
-            if (isContain(c.getCommentText(), searchString)) {
+            if (isContain(c.getText(), searchString)) {
                 return true;
             }
         }
@@ -101,29 +102,44 @@ public class Project {
         return m.find();
     }
 
-    public List<Issue> getIssueList() {
-        return issueList;
+    public static void setProjectCount(Integer projectCount) {
+        Project.projectCount = projectCount;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIssues(ArrayList<Issue> issues) {
+        this.issues = issues;
+    }
+
+    public void setProjectTime(Date projectTime) {
+        this.projectTime = projectTime;
+    }
+
+    public List<Issue> getIssuesList() {
+        return issues;
     }
 
     public Issue getIssue(int issueId) {
-        for (int i = 0; i < issueList.size(); i++) {
-            if (issueId == issueList.get(i).getIssueID()) {
-                return issueList.get(i);
-            }
-        }
-        return null;
+        return issues.get(issueId - 1);
+    }
+    
+    public int getLastIssueNum(){
+        return issues.size();
     }
 
     public int getProjectId() {
-        return projectId;
+        return id;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getName() {
+        return name;
     }
 
     //** Changed **
-//    public String getProjectTime() {
+//    public String getTimestamp() {
 //        ft = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
 //        return ft.format(projectTime);
 //    }

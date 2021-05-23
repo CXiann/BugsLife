@@ -7,76 +7,74 @@ import java.util.List;
 
 public class Issue implements Comparable<Issue> {
 
-    private static Integer issueCount = 0;
-    private Integer issueID;
+    protected transient static Integer issueCount = 0;
+    protected transient static String sortType;
+    transient CommandLineTable lt = new CommandLineTable();
+    private Integer id;
+    private String title;
     private Integer priority;
-    private String issueTitle;
-    private String issueDescrip;
-    private String creatorUser;
-    private String assigneeUser;
-    private String tag;
     private String status;
-    protected static String sortType;
+    private String tag;
+    private String descriptionText;
+    private String createdBy;
+    private String assignee;
 //    private SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss"); --> Date, set at gson
-    private Date timestampIssue;
-    ArrayList<Comment> listComment = new ArrayList<>();
+    private Date timestamp;
+    ArrayList<Comment> comments = new ArrayList<>();
     List<Update> historyIssue = new ArrayList<>();
-
-    public Issue() {
-    }
 
     public Issue(String issueTitle, String issueDescrip, String tag, Integer priority, String status, String creatorUser, String assigneeUser) {
         issueCount++;
-        this.issueID = issueCount;
+        this.id = issueCount;
         this.priority = priority;
-        this.issueTitle = issueTitle;
-        this.issueDescrip = issueDescrip;
-        this.creatorUser = creatorUser;
-        this.assigneeUser = assigneeUser;
+        this.title = issueTitle;
+        this.descriptionText = issueDescrip;
+        this.createdBy = creatorUser;
+        this.assignee = assigneeUser;
         this.tag = tag;
         this.status = status;
-        this.timestampIssue = new Date();
-        historyIssue.add(new Update(issueTitle, this.getTimestampIssue(), 'C'));
+        this.timestamp = new Date();
+        historyIssue.add(new Update(issueTitle, this.getTimestamp(), 'C'));
     }
 
-    public void addComment(String cUser, String cText) {
-        Comment c = new Comment(cUser, cText);
-        listComment.add(c);
+    public void addComment(String User, String Text) {
+        Comment c = new Comment(User, Text);
+        comments.add(c);
+        Date commentAddedTime = new Date();
+        historyIssue.add(new Update(Text, User, commentAddedTime, 'c'));
     }
 
     public void addReaction(int commentNum, String s) {
-        listComment.get(commentNum - 1).increaseReactionCount(s);
+        comments.get(commentNum - 1).increaseReactionCount(s);
     }
 
-    CommandLineTable lt = new CommandLineTable();
-
     public void printSingleIssue() { //print in console
-        System.out.println(this.getIssueID() + " | " + this.getIssueTitle() + " | " + this.getStatus() + " | " + this.getTag() + " | \t" + this.getPriority() + " | " + this.getTimestampIssue() + " | " + this.getAssigneeUser() + "\t | " + this.getCreatorUser() + "\t|\n");   //write in main
+        System.out.println(this.getIssueID() + "," + this.getTitle() + "," + this.getStatus() + "," + this.getTag() + "," + this.getPriority() + "," + this.getTimestamp() + "," + this.getAssignee() + "," + this.getCreatedBy());
     }
 
     public String[] printIssue() {
         String[] print = null;
-        String str = this.getIssueID() + "," + this.getIssueTitle() + "," + this.getStatus() + ","
-                + this.getTag() + "," + this.getPriority() + "," + this.getTimestampIssue() + ","
-                + this.getAssigneeUser() + "," + this.getCreatorUser();
+        String str = this.getIssueID() + "," + this.getTitle() + "," + this.getStatus() + ","
+                + this.getTag() + "," + this.getPriority() + "," + this.getTimestamp() + ","
+                + this.getAssignee() + "," + this.getCreatedBy();
         print = str.split(",", 0);
         return print;
     }
 
     public String getIssuePage() {
         String s = "Issue ID: " + this.getIssueID() + "\tStatus: " + this.getStatus()
-                + "\nTag: " + this.getStatus() + "\tPriority: " + this.getPriority() + "\tCreated On: " + this.getTimestampIssue()
-                + "\nTitle: " + this.getIssueTitle()
-                + "\nAssigned to: " + this.getAssigneeUser() + "\t\tCreated By: " + this.getCreatorUser()
+                + "\nTag: " + this.getStatus() + "\tPriority: " + this.getPriority() + "\tCreated On: " + this.getTimestamp()
+                + "\nTitle: " + this.getTitle()
+                + "\nAssigned to: " + this.getAssignee() + "\t\tCreated By: " + this.getCreatedBy()
                 + "\nIssue Description\n----------------\n"
-                + this.getIssueDescrip() + "\n";
+                + this.getDescriptionText() + "\n";
         return s;
     }
 
     public String getCommentPage() {
         String s = "Comments\n---------\n";
-        if (!listComment.isEmpty()) {
-            for (Comment c : listComment) {
+        if (!comments.isEmpty()) {
+            for (Comment c : comments) {
                 s += c.toString();
             }
         } else {
@@ -87,9 +85,9 @@ public class Issue implements Comparable<Issue> {
 
     public void updateStatus(String newStatus) {
         String currentStatus = this.getStatus();
-        Date time = this.getTimestampIssue();
         if (canSetStatus(newStatus)) {
-            historyIssue.add(new Update(currentStatus, newStatus, time));
+            Date statusUTime = new Date();
+            historyIssue.add(new Update(currentStatus, newStatus, statusUTime));
             this.status = newStatus;
         } else {
             System.out.println("There's no such option!");
@@ -98,10 +96,10 @@ public class Issue implements Comparable<Issue> {
 
     public void updateComment(int Id, String newComment) {
         int id = Id - 1;
-        if (id >= 0 && id < listComment.size()) {
-            Date time = this.getTimestampIssue();
-            historyIssue.add(new Update(id, newComment, time));
-            this.listComment.get(id).commentText = newComment;
+        if (id >= 0 && id < comments.size()) {
+            Date commentUTime = new Date();
+            historyIssue.add(new Update(id, newComment, commentUTime));
+            this.comments.get(id).text = newComment;
         } else {
             System.out.println("Invalid Comment Id!");
         }
@@ -111,15 +109,19 @@ public class Issue implements Comparable<Issue> {
         System.out.println("Activities History");
         System.out.println("-----------------------------------------\nLatest\n------");  //seperation line
         for (int i = historyIssue.size() - 1; i >= 0; i--) {
-            if (historyIssue.get(i).getTitleU() != null) {                                 //if have title stored(issue created)
-                System.out.println((i + 1) + "# Created new issue with the title of \"" + historyIssue.get(i).getTitleU() + "\"\nat " + historyIssue.get(i).getTime());
-            } else if (historyIssue.get(i).getStatusU() != null) {                           //if have status stored(status updated)
-                System.out.println((i + 1) + "# Updated issue status\nfrom \"" + historyIssue.get(i).getStatusB() + "\" to \"" + historyIssue.get(i).getStatusU() + "\"\nat " + historyIssue.get(i).getTime());
-            } else if (historyIssue.get(i).getCommentU() != null) {                               //if have comment stored(comment updated)
-                System.out.println((i + 1) + "# Updated issue comment of\nID: " + historyIssue.get(i).getCommentIdU() + "\nComment updated: " + historyIssue.get(i).getCommentU() + "\nat " + historyIssue.get(i).getTime());
-            } else if (historyIssue.get(i).getProjectNameU() != null) {                               //if have project name stored(project created)
-                System.out.println(historyIssue.get(i).getUpdateNumber() + "# Created new project with the title of \"" + historyIssue.get(i).getProjectNameU() + "\"\nat " + historyIssue.get(i).getTime());
-            }
+            if (historyIssue.get(i).getTitleU() != null) {                     //if have title stored(issue created)
+                System.out.println((i + 1) + "# Created new issue with the title of \"" + historyIssue.get(i).getTitleU() + "\"\nat " + historyIssue.get(i).getTimeU());
+            } else if (historyIssue.get(i).getStatusU() != null) {             //if have status stored(status updated)
+                System.out.println((i + 1) + "# Updated issue status\nfrom \"" + historyIssue.get(i).getStatusBefore() + "\" to \"" + historyIssue.get(i).getStatusU() + "\"\nat " + historyIssue.get(i).getTimeU());
+            } else if (historyIssue.get(i).getCommentU() != null) {            //if have comment stored(comment updated)
+                System.out.println((i + 1) + "# Updated issue comment of\nID: " + historyIssue.get(i).getCommentIdU() + "\nComment updated: " + historyIssue.get(i).getCommentU() + "\nat " + historyIssue.get(i).getTimeU());
+            } else if (historyIssue.get(i).getCommentTitleCreatedU() != null) { //if have title stored(comment created)
+                System.out.println((i + 1) + "# Created new comment with the title of \"" + historyIssue.get(i).getCommentTitleCreatedU()+"\" by "+historyIssue.get(i).getCommentUserCreatedU()+ "\nat " + historyIssue.get(i).getTimeU());
+            } 
+            /*cannot implement project created, need to print seperately
+            else if (historyIssue.get(i).getProjectNameU() != null) {        //if have project name stored(project created)
+                System.out.println(historyIssue.get(i).getUpdateNumber() + "# Created new project with the title of \"" + historyIssue.get(i).getProjectNameU() + "\"\nat " + historyIssue.get(i).getTimeU());
+            }*/
             System.out.println("------------------------------------------");
         }
         System.out.println("Oldest\n-------\n-----------------------------------------\n");
@@ -156,38 +158,38 @@ public class Issue implements Comparable<Issue> {
         } else if (sortType.equalsIgnoreCase("Tag")) {
             return this.getTag().compareTo(i.getTag());
         } else if (sortType.equalsIgnoreCase("Time")) {
-            return i.getTimestampIssue().compareTo(this.getTimestampIssue());
+            return i.getTimestamp().compareTo(this.getTimestamp());
         } else {
             return 0;
         }
     }
 
-    public ArrayList<Comment> getListComment() {
-        return listComment;
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 
     public int getIssueID() {
-        return issueID;
+        return id;
     }
 
     public int getPriority() {
         return priority;
     }
 
-    public String getIssueTitle() {
-        return issueTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public String getIssueDescrip() {
-        return issueDescrip;
+    public String getDescriptionText() {
+        return descriptionText;
     }
 
-    public String getCreatorUser() {
-        return creatorUser;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public String getAssigneeUser() {
-        return assigneeUser;
+    public String getAssignee() {
+        return assignee;
     }
 
     public String getTag() {
@@ -198,12 +200,16 @@ public class Issue implements Comparable<Issue> {
         return status;
     }
 
+    public int getLastCommentNum() {
+        return comments.size();
+    }
+
     /**
      * Changed ** public String getTimestampIssue() { return
-     * ft.format(timestampIssue); }
+     * ft.format(timestamp); }
      */
-    public Date getTimestampIssue() {
-        return timestampIssue;
+    public Date getTimestamp() {
+        return timestamp;
     }
 
     /*same as printSingleIssue()
