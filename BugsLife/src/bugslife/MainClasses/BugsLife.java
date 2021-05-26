@@ -37,11 +37,11 @@ public class BugsLife extends Application {
         Comment.commentCount = m.getProjectsList().get(0).getIssue(1).getLastCommentNum();
          */
         stg = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("bugslife/FXML/LoginPage.fxml"));
 
         Scene scene = new Scene(root);
         primaryStage.setResizable(false);
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("src/resources/images/bugsIcon.png")));
+        primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("resources/images/bugsIcon.png")));
         primaryStage.setTitle("Bugs Everywhere");
         primaryStage.setScene(scene);
         primaryStage.show();
