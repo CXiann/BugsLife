@@ -1,4 +1,4 @@
-package bugslife;
+package bugslife.MainClasses;
 
 import java.util.List;
 

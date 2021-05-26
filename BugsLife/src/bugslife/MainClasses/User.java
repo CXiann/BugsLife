@@ -1,5 +1,5 @@
 
-package bugslife;
+package bugslife.MainClasses;
 
 public class User {
     private transient static int userCount = 0;

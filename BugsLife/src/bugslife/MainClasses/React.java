@@ -1,4 +1,4 @@
-package bugslife;
+package bugslife.MainClasses;
 
 public class React {
     private String reaction;

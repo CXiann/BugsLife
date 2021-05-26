@@ -1,4 +1,4 @@
-package bugslife;
+package bugslife.MainClasses;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
