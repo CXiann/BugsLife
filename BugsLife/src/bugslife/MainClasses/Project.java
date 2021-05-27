@@ -1,8 +1,7 @@
 package bugslife.MainClasses;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -17,7 +16,8 @@ public class Project {
     private Integer id;
     private String name;
     ArrayList<Issue> issues = new ArrayList<>();
-    private Date projectTime;
+//    private Date projectTime;
+    private long projectTime;
     //private transient SimpleDateFormat ft; 
     //ArrayList<Update> history = new ArrayList<>();                              
     //dunno how to implement update for creating project(diif. class)           
@@ -25,7 +25,8 @@ public class Project {
     public Project(String projectName) {
         this.name = projectName;
         id = ++projectCount;
-        projectTime = new Date();
+        projectTime = Instant.now().getEpochSecond();
+//        projectTime = new Date();
         //history.add(new Update(name, this.getProjectTime()));
     }
 
@@ -53,7 +54,6 @@ public class Project {
 //            i.printSingleIssue();
 //        }
 //    }
-
     /**
      * search issueTitle,issueDescription,issueComment for matching keywords
      *
@@ -73,11 +73,10 @@ public class Project {
 
     /**
      * sort issues according to criteria in String only sorted for display(no
- changes on the actual position in issues)
+     * changes on the actual position in issues)
      *
      * @param sortType criteria to sort
      */
-    
     public void sortIssue(String sortType) {
         issues.get(0).sortType = sortType;                    //sortType is static and is created for determining which statement to use in compareTo() 
         PriorityQueue<Issue> p = new PriorityQueue(issues);   //create temporary PriorityQueue to automatically sort according to criteria               
@@ -85,7 +84,7 @@ public class Project {
             p.poll().printSingleIssue();                         //remove head element from the PriorityQueue(already sorted) and print it one by one until empty
         }
     }
-     
+
     private boolean isCommentContain(ArrayList<Comment> comment, String searchString) {   //to check for exact string in an ArrayList<Comment>(local method)
         for (Comment c : comment) {
             if (isContain(c.getText(), searchString)) {
@@ -114,7 +113,10 @@ public class Project {
         this.issues = issues;
     }
 
-    public void setProjectTime(Date projectTime) {
+//    public void setProjectTime(Date projectTime) {
+//        this.projectTime = projectTime;
+//    }
+    public void setProjectTime(long projectTime) {
         this.projectTime = projectTime;
     }
 
@@ -125,8 +127,8 @@ public class Project {
     public Issue getIssue(int issueId) {
         return issues.get(issueId - 1);
     }
-    
-    public int getLastIssueNum(){
+
+    public int getLastIssueNum() {
         return issues.size();
     }
 
@@ -143,7 +145,11 @@ public class Project {
 //        ft = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
 //        return ft.format(projectTime);
 //    }
-    public Date getProjectTime() {
+//    public Date getProjectTime() {
+//        return projectTime;
+//    }
+
+    public long getProjectTime() {
         return projectTime;
     }
 }

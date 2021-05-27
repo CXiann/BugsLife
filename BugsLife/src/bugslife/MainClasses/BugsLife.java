@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -36,6 +37,153 @@ public class BugsLife extends Application {
         //Only use when creating another comment in exsiting issue
         Comment.commentCount = m.getProjectsList().get(0).getIssue(1).getLastCommentNum();
          */
+        /* in case u ned to create again the json file
+                User[] u = new User[4];
+        u[0] = new User("jhoe", "password");
+        u[1] = new User("btan", "password");
+        u[2] = new User("liew", "password");
+        u[3] = new User("ang", "password");
+        Project p = new Project("Nuxtjs");                                     //create new project @param : title
+        MainPage m = new MainPage(new ArrayList<>(Arrays.asList(p)), new ArrayList<>(Arrays.asList(u)));
+        m.getProjectsList().get(0).createIssue("Can't display the table",
+                "Hi, \n\n            I'm receiving the \"Can't display the data because Power BI can't determine the relationship between two or more fields.\" error message and I do not understand why. I have searched the net for help but can't find a post that answers my question.\n\n           It may well be a straight modelling restriction but best to check.\n\n\n   I have two datasources (Sheet 1 and Sheet 2). Both are Excel files.",
+                "Frontend", 4, "In Progress", "jhoe", "btan");    //create new issues @param : issueTitle,description,tag,priority,creator,assignee
+
+        Issue i1 = m.getProject(1).getIssue(1);                               //create issues object to modify easily
+        i1.addComment("liew",
+                "Please find below links to the two .pbix files I've created in an attempt toconquer this error I'm receiving.");                         //add comment into selected issues @param : creator,commentText
+
+        i1.addReaction(1, "happy");  //add reaction to selected comment Id @param : commentId,reactionType
+
+        i1.addComment("ang",
+                "Try this https://www.dropbox.com/home?preview=Relationships.pbix\n\nJust I removed the relationship between sheet1 and sheet1BridgingTable, sheet2 and sheet2BrdgingTable");
+        m.getProject(1).createIssue("Can't open file",
+                "Windows 10 Photo will not open a jpg file. I get \"We can't open this file.\" error message.\n\nThey're family photo that I sure would like to salvage.  Thanks",
+                "Backend", 3, "Open", "btan", "jhoe");
+
+        Issue i2 = m.getProject(1).getIssue(2);                               //create issues object to modify easily
+        setCStaticCountZero();
+        i2.addComment("liew",
+                "I am having the same issue with a disc of photos from Christmas given to me by my sister. I have tried opening all of the photos with all of my available opening options and still get the same message as above poster. ");                         //add comment into selected issues @param : creator,commentText
+        i2.addReaction(1, "angry");
+        i2.addReaction(1, "happy");
+        i2.addReaction(1, "happy");
+
+        i2.addComment("btan",
+                "lad photos of windows 8 & 10 are worst possible application ever developed!\n\n                    just change default view to \"windows photo viewer\" if you dont have any other application");
+        i2.addReaction(2, "angry");
+        i2.addReaction(2, "angry");
+        i2.addReaction(2, "angry");
+        i2.addReaction(2, "angry");
+        i2.addReaction(2, "angry");
+        i2.addReaction(2, "happy");
+        i2.addReaction(2, "happy");
+
+        i2.addComment("ang",
+                "Window 10 can but window vista does not work");
+        i2.addReaction(3, "angry");
+        i2.addReaction(3, "angry");
+        i2.addReaction(3, "angry");
+        i2.addReaction(3, "angry");
+        i2.addReaction(3, "angry");
+        i2.addReaction(3, "angry");
+        i2.addReaction(3, "angry");
+        i2.addReaction(3, "angry");
+        i2.addReaction(3, "angry");
+        
+        System.out.println(p.getName());
+
+        //2nd projects
+        m.addProjects("Vuejs");
+        m.getProject(2).createIssue("Flash of unstyled content",
+                "What is expected ?\nExpected correct scrollspy active link highlighting and all links work.\n\nWhat is actually happening?\nPage jumps to top before smooth scroll, which leads to weird links highlighting. Also, sometimes some links doesn't highlight (like Server Rendered in demo video)\n\nAdditional comments?\nDemonstration - https://imgur.com/a/GGvITVB",
+                "cmty:bug-report", 6, "Open", "btan", "ang");
+
+        Issue i11 = m.getProject(2).getIssue(1);
+        setCStaticCountZero();
+        i11.addComment("liew",
+                "Here is what I am referring to: https://streamable.com/hkyg3 Apologies for not posting a video when creating the issue! ");
+        i11.addReaction(1, "happy");
+        i11.addReaction(1, "happy");
+        i11.addReaction(1, "angry");
+
+        i11.addComment("ang",
+                "Thanks for video, seems interesting, weirdly enough I couldn't reproduce.\nWill see what can be done.");
+        i11.addReaction(2, "happy");
+        i11.addReaction(2, "happy");
+        i11.addReaction(2, "angry");
+        i11.addReaction(2, "angry");
+        i11.addReaction(2, "angry");
+        i11.addReaction(2, "angry");
+        i11.addReaction(2, "angry");
+
+        i11.addComment("jhoe",
+                "Thanks for everything");
+        i11.addReaction(3, "happy");
+        i11.addReaction(3, "happy");
+        i11.addReaction(3, "angry");
+
+        m.getProject(2).createIssue("User is \"trapped\" on 404 page",
+                "When hitting the 404 page, the Nuxt layout isn't applied correctly.",
+                "Backend", 8, "Closed", "ang", "jhoe");
+        Issue i22 = m.getProject(2).getIssue(2);
+        setCStaticCountZero();
+        i22.addComment("btan",
+                "Still a problem. ");
+        i22.addReaction(1, "happy");
+        i22.addReaction(1, "happy");
+        i22.addReaction(1, "angry");
+        i22.addReaction(1, "angry");
+        i22.addReaction(1, "angry");
+        i22.addReaction(1, "angry");
+        i22.addReaction(1, "angry");
+        i22.addReaction(1, "angry");
+
+        i22.addComment("ang",
+                "/cc @clarkdo");
+        i22.addReaction(2, "happy");
+        i22.addReaction(2, "happy");
+        i22.addReaction(2, "happy");
+        i22.addReaction(2, "angry");
+        i22.addReaction(2, "angry");
+        i22.addReaction(2, "angry");
+        i22.addReaction(2, "angry");
+        i22.addReaction(2, "angry");
+
+        //3rd Project
+        m.addProjects("Reactjs");
+        m.getProject(3).createIssue("Flash of unstyled content",
+                "What is expected ?\nThere is no flash of unstyled content            \n\nWhat is actually happening?\nThere is a brief flash of unstyled content\n\nAdditional comments? \nDoesn't occur in Chrome",
+                "cmty:bug-report", 1, "Open", "liew", "btan");
+        Issue i111 = m.getProject(3).getIssue(1);
+        setCStaticCountZero();
+        i111.addComment("liew",
+                "To: https://streamable.com/hkyg3 Apologies for not posting a video when creating the issue!");
+        i111.addReaction(1, "happy");
+        i111.addReaction(1, "happy");
+        i111.addReaction(1, "angry");
+        i111.addReaction(1, "thumbsUp");
+        i111.addReaction(1, "thumbsUp");
+        i111.addReaction(1, "thumbsUp");
+        i111.addReaction(1, "thumbsUp");
+        i111.addReaction(1, "thumbsUp");
+
+        i111.addComment("ang",
+                "Thanks for video, seems interesting, weirdly enough I couldn't reproduce.\nWill see what can be done.");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "angry");
+        i111.addReaction(2, "happy");
+        i111.addReaction(2, "happy");
+
+        serialize(m);
+        */
         stg = primaryStage;
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("bugslife/FXML/LoginPage.fxml"));
 
@@ -44,7 +192,7 @@ public class BugsLife extends Application {
         primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("resources/images/bugsIcon.png")));
         primaryStage.setTitle("Bugs Everywhere");
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show(); 
 
     }
     
@@ -56,7 +204,7 @@ public class BugsLife extends Application {
     public void closeWindow(){
         stg.close();
     }
-
+    
     public static void printSearchResult(ArrayList<Issue> matched, String keyword) {
         System.out.println("\nSearch Results for \"" + keyword + "\" :");
         if (!matched.isEmpty()) {
@@ -105,7 +253,7 @@ public class BugsLife extends Application {
     private static void serialize(MainPage m) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(m);
-        String path = "data.json";
+        String path = "dataNew.json";
 
         try {
             FileWriter writer = new FileWriter(path);
@@ -146,7 +294,7 @@ public class BugsLife extends Application {
         }
         return tmap;
     }
-
+    
     public static boolean canLogin(String user, String password) {
         for (User u : m.getUsers()) {
             if (u.getUsername().equals(user) && u.getPassword().equals(password)) {

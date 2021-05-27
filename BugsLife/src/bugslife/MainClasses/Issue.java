@@ -1,6 +1,7 @@
 package bugslife.MainClasses;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,8 @@ public class Issue implements Comparable<Issue> {
     private String createdBy;
     private String assignee;
 //    private SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss"); --> Date, set at gson
-    private Date timestamp;
+    private long timestamp;
+//    private Date timestamp;
     ArrayList<Comment> comments = new ArrayList<>();
     List<Update> historyIssue = new ArrayList<>();
 
@@ -33,14 +35,16 @@ public class Issue implements Comparable<Issue> {
         this.assignee = assigneeUser;
         this.tag = tag;
         this.status = status;
-        this.timestamp = new Date();
+        this.timestamp = Instant.now().getEpochSecond();
+//        this.timestamp = new Date();
         historyIssue.add(new Update(issueTitle, this.getTimestamp(), 'C'));
     }
 
     public void addComment(String User, String Text) {
         Comment c = new Comment(User, Text);
         comments.add(c);
-        Date commentAddedTime = new Date();
+//        Date commentAddedTime = new Date();
+        long commentAddedTime = Instant.now().getEpochSecond();
         historyIssue.add(new Update(Text, User, commentAddedTime, 'c'));
     }
 
@@ -86,7 +90,8 @@ public class Issue implements Comparable<Issue> {
     public void updateStatus(String newStatus) {
         String currentStatus = this.getStatus();
         if (canSetStatus(newStatus)) {
-            Date statusUTime = new Date();
+//            Date statusUTime = new Date();
+            long statusUTime = Instant.now().getEpochSecond();
             historyIssue.add(new Update(currentStatus, newStatus, statusUTime));
             this.status = newStatus;
         } else {
@@ -97,7 +102,8 @@ public class Issue implements Comparable<Issue> {
     public void updateComment(int Id, String newComment) {
         int id = Id - 1;
         if (id >= 0 && id < comments.size()) {
-            Date commentUTime = new Date();
+//            Date commentUTime = new Date();
+            long commentUTime = Instant.now().getEpochSecond();
             historyIssue.add(new Update(id, newComment, commentUTime));
             this.comments.get(id).text = newComment;
         } else {
@@ -116,8 +122,8 @@ public class Issue implements Comparable<Issue> {
             } else if (historyIssue.get(i).getCommentU() != null) {            //if have comment stored(comment updated)
                 System.out.println((i + 1) + "# Updated issue comment of\nID: " + historyIssue.get(i).getCommentIdU() + "\nComment updated: " + historyIssue.get(i).getCommentU() + "\nat " + historyIssue.get(i).getTimeU());
             } else if (historyIssue.get(i).getCommentTitleCreatedU() != null) { //if have title stored(comment created)
-                System.out.println((i + 1) + "# Created new comment with the title of \"" + historyIssue.get(i).getCommentTitleCreatedU()+"\" by "+historyIssue.get(i).getCommentUserCreatedU()+ "\nat " + historyIssue.get(i).getTimeU());
-            } 
+                System.out.println((i + 1) + "# Created new comment with the title of \"" + historyIssue.get(i).getCommentTitleCreatedU() + "\" by " + historyIssue.get(i).getCommentUserCreatedU() + "\nat " + historyIssue.get(i).getTimeU());
+            }
             /*cannot implement project created, need to print seperately
             else if (historyIssue.get(i).getProjectNameU() != null) {        //if have project name stored(project created)
                 System.out.println(historyIssue.get(i).getUpdateNumber() + "# Created new project with the title of \"" + historyIssue.get(i).getProjectNameU() + "\"\nat " + historyIssue.get(i).getTimeU());
@@ -158,7 +164,8 @@ public class Issue implements Comparable<Issue> {
         } else if (sortType.equalsIgnoreCase("Tag")) {
             return this.getTag().compareTo(i.getTag());
         } else if (sortType.equalsIgnoreCase("Time")) {
-            return i.getTimestamp().compareTo(this.getTimestamp());
+            //Not Sure Can use ma
+            return (Long.toString(i.getTimestamp())).compareTo((Long.toString(this.timestamp)));
         } else {
             return 0;
         }
@@ -208,9 +215,14 @@ public class Issue implements Comparable<Issue> {
      * Changed ** public String getTimestampIssue() { return
      * ft.format(timestamp); }
      */
-    public Date getTimestamp() {
+//    public Date getTimestamp() {
+//        return timestamp;
+//    }
+
+    public long getTimestamp() {
         return timestamp;
     }
+
 
     /*same as printSingleIssue()
     public String toString() {

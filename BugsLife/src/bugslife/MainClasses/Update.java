@@ -16,16 +16,17 @@ public class Update {
     private int commentIdU;
     private String statusBefore;
     private String statusU;
-    private Date timeU;
+//    private Date timeU;
+    private long timeU;
 
-    public Update(int commentIdU, String commentU, Date time) {    //update comment
+    public Update(int commentIdU, String commentU, long time) {    //update comment
         this.commentU = commentU;
         this.commentIdU = ++commentIdU;
         this.timeU = time;
         updateNumber = ++updateCount;
     }
 
-    public Update(String commentTitleCreatedU, String commentUserCreatedU, Date timeU, char c) {       //create comment
+    public Update(String commentTitleCreatedU, String commentUserCreatedU, long timeU, char c) {       //create comment
         this.c = c;
         this.commentTitleCreatedU = commentTitleCreatedU;
         this.commentUserCreatedU = commentUserCreatedU;
@@ -34,20 +35,20 @@ public class Update {
     }
 
     
-    public Update(String titleU, Date time, char c) {  //creating issue
+    public Update(String titleU, long time, char c) {  //creating issue
         this.titleU = titleU;
         this.c = c;
         this.timeU = time;
         updateNumber = ++updateCount;
     }
 
-    public Update(String projectNameU, Date time) {   //creating project
+    public Update(String projectNameU, long time) {   //creating project
         this.timeU = time;
         this.projectNameU = projectNameU;
         updateNumber = ++updateCount;
     }
 
-    public Update(String statusB, String statusU, Date time) {    //update status
+    public Update(String statusB, String statusU, long time) {    //update status
         this.statusU = statusU;
         this.timeU = time;
         this.statusBefore = statusB;
@@ -62,8 +63,12 @@ public class Update {
         return updateNumber;
     }
 
-    public Date getTimeU() {
-        return timeU;
+//    public Date getTimeU() {
+//        return timeU;
+//    }
+    
+    public long getTimeU() {
+        return this.timeU;
     }
 
     public String getStatusBefore() {
