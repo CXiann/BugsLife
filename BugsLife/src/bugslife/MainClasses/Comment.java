@@ -78,9 +78,8 @@ public class Comment {
 //    public Date getTimestamp() {
 //        return timestamp;
 //    }
-
-    public long getTimestamp() {
-        return this.timestamp;
+    public String getTimestamp() {
+        return formatDate(timestamp);
     }
 
     /**
@@ -94,6 +93,17 @@ public class Comment {
                 + this.getAllReactionsData() + "\n";
         return s;
 
+    }
+
+    private static String formatDate(long date) {
+        // convert seconds to milliseconds
+        Date systemDate = new java.util.Date(date * 1000L);
+        // the format of your date
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // give a timezone reference for formatting (see comment at the bottom)
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT-4"));
+        String formattedDate = sdf.format(systemDate);
+        return formattedDate;
     }
 
     /*    

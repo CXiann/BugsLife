@@ -1,10 +1,10 @@
-
 package bugslife.MainClasses;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class Update {
+
     private transient char c;
     protected transient static int updateCount = 0;
     private int updateNumber;
@@ -34,7 +34,6 @@ public class Update {
         updateNumber = ++updateCount;
     }
 
-    
     public Update(String titleU, long time, char c) {  //creating issue
         this.titleU = titleU;
         this.c = c;
@@ -66,9 +65,8 @@ public class Update {
 //    public Date getTimeU() {
 //        return timeU;
 //    }
-    
-    public long getTimeU() {
-        return this.timeU;
+    public String getTimeU() {
+        return formatDate(timeU);
     }
 
     public String getStatusBefore() {
@@ -103,4 +101,14 @@ public class Update {
         return commentIdU;
     }
 
+    private static String formatDate(long date) {
+        // convert seconds to milliseconds
+        Date systemDate = new java.util.Date(date * 1000L);
+        // the format of your date
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // give a timezone reference for formatting (see comment at the bottom)
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT-4"));
+        String formattedDate = sdf.format(systemDate);
+        return formattedDate;
+    }
 }

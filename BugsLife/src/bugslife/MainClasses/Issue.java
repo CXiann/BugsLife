@@ -164,8 +164,7 @@ public class Issue implements Comparable<Issue> {
         } else if (sortType.equalsIgnoreCase("Tag")) {
             return this.getTag().compareTo(i.getTag());
         } else if (sortType.equalsIgnoreCase("Time")) {
-            //Not Sure Can use ma
-            return (Long.toString(i.getTimestamp())).compareTo((Long.toString(this.timestamp)));
+            return i.getTimestamp().compareTo(this.getTimestamp());
         } else {
             return 0;
         }
@@ -218,11 +217,20 @@ public class Issue implements Comparable<Issue> {
 //    public Date getTimestamp() {
 //        return timestamp;
 //    }
-
-    public long getTimestamp() {
-        return timestamp;
+    public String getTimestamp() {
+        return formatDate(timestamp);
     }
 
+    private static String formatDate(long date) {
+        // convert seconds to milliseconds
+        Date systemDate = new java.util.Date(date * 1000L);
+        // the format of your date
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // give a timezone reference for formatting (see comment at the bottom)
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT-4"));
+        String formattedDate = sdf.format(systemDate);
+        return formattedDate;
+    }
 
     /*same as printSingleIssue()
     public String toString() {

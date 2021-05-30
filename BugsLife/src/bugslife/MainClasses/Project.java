@@ -148,8 +148,18 @@ public class Project {
 //    public Date getProjectTime() {
 //        return projectTime;
 //    }
+    public String getProjectTime() {
+        return formatDate(projectTime);
+    }
 
-    public long getProjectTime() {
-        return projectTime;
+    private static String formatDate(long date) {
+        // convert seconds to milliseconds
+        Date systemDate = new java.util.Date(date * 1000L);
+        // the format of your date
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // give a timezone reference for formatting (see comment at the bottom)
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT-4"));
+        String formattedDate = sdf.format(systemDate);
+        return formattedDate;
     }
 }

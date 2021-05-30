@@ -2,6 +2,7 @@ package bugslife.MainClasses;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -184,16 +185,22 @@ public class BugsLife extends Application {
 
         serialize(m);
         */
+        
         stg = primaryStage;
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("bugslife/FXML/LoginPage.fxml"));
 
         Scene scene = new Scene(root);
         primaryStage.setResizable(false);
+        //Try the commented line if cannot run again
+//        File file = new File("C:\\Users\\User\\Documents\\NetBeansProjects\\BugsLifeClone\\BugsLife\\BugsLife\\src\\resources\\images\\bugsIcon.png");
         primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("resources/images/bugsIcon.png")));
+//        primaryStage.getIcons().add(new Image(file.toURI().toString()));
         primaryStage.setTitle("Bugs Everywhere");
         primaryStage.setScene(scene);
-        primaryStage.show(); 
-
+        primaryStage.show();
+        
+        printProjectDashboard(m.getProject(2));
+        printIssuesDashboard(m.getProject(2));
     }
     
     public void changeScene(String fxml) throws IOException{
@@ -269,7 +276,7 @@ public class BugsLife extends Application {
     private static MainPage deserialize() {
         Gson gson = new Gson();
         try {
-            return gson.fromJson(new FileReader("data.json"), MainPage.class);
+            return gson.fromJson(new FileReader("dataNew.json"), MainPage.class);
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
