@@ -6,6 +6,7 @@
 package bugslife.Controllers;
 
 import bugslife.MainClasses.BugsLife;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -32,26 +35,32 @@ public class LoginPageController {
     @FXML
     private TextField passwordF;
 
-    private String username, password;
-
+    public static String usernameC, passwordC;
+    @FXML
+    private ImageView cross;
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception {
 
-        username = usernameF.getText();
-        password = passwordF.getText();
-        if (BugsLife.canLogin(username, password)) {
-            BugsLife main = new BugsLife();
-            main.closeWindow();
-            //main.changeScene("nextfxml.fxml");
+        usernameC = usernameF.getText();
+        passwordC = passwordF.getText();
+        if (BugsLife.canLogin(usernameC, passwordC)) {
+            BugsLife.stg.close();
+            //BugsLife main = new BugsLife();
+            //main.closeWindow();
         }
-        else if (username.isEmpty() || password.isEmpty()) {
+        else if (usernameC.isEmpty() || passwordC.isEmpty()) {
             wrongLabel.setText("Please fill up your data");
         }else{
             wrongLabel.setText("You have entered wrong username or password!!");
         }
-        System.out.println("Username : " + username);
-        System.out.println("Password : " + password);
+        System.out.println("Username : " + usernameC);
+        System.out.println("Password : " + passwordC);
         
+    }
+
+    @FXML
+    private void close(MouseEvent event) {
+        System.exit(0);
     }
 
 }

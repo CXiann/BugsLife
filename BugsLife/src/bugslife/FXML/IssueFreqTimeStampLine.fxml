@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bugslife.Controllers.IssueFreqTimeStampLineController">
+   <children>
+      <LineChart fx:id="lineChart" layoutX="11.0" layoutY="7.0" prefHeight="441.0" prefWidth="578.0" title="Number of Issues (Month)">
+        <xAxis>
+          <CategoryAxis label="Month" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Frequency" minorTickCount="1" side="LEFT" upperBound="10.0" />
+        </yAxis>
+      </LineChart>
+      <Button fx:id="button" layoutX="250.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Load Line Chart" />
+   </children>
+</AnchorPane>

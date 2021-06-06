@@ -35,7 +35,7 @@ public class Project {
         issues.add(new Issue(issueTitle, issueDescrip, tag, priority, status, creatorUser, assigneeUser));
     }
 
-//    public void printAllProjects() {
+//    public void printProject() {
 //        System.out.println(this.getProjectId() + "\t\t" + this.getProjectName() + "\t\t" + this.issues.size() + "\n");
 //    }
 //    public void printAllIssues() {
@@ -43,7 +43,7 @@ public class Project {
 //            i.printSingleIssue();
 //        }
 //    }
-    public String[] printAllProjects() {
+    public String[] printProject() {
         String str = this.getProjectId() + "," + this.getName() + "," + this.issues.size();
         String[] print = str.split(",", 0);
         return print;
