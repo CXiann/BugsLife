@@ -3,10 +3,8 @@ package bugslife.MainClasses;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,20 +48,6 @@ public class Project {
             }
         }
         return match;
-    }
-
-    /**
-     * sort issues according to criteria in String only sorted for display(no
-     * changes on the actual position in issues)
-     *
-     * @param sortType criteria to sort
-     */
-    public void sortIssue(String sortType) {
-        issues.get(0).sortType = sortType;                    //sortType is static and is created for determining which statement to use in compareTo() 
-        PriorityQueue<Issue> p = new PriorityQueue(issues);   //create temporary PriorityQueue to automatically sort according to criteria               
-        while (!p.isEmpty()) {
-            p.poll().printSingleIssue();                         //remove head element from the PriorityQueue(already sorted) and print it one by one until empty
-        }
     }
 
     private boolean isCommentContain(ArrayList<Comment> comment, String searchString) {   //to check for exact string in an ArrayList<Comment>(local method)

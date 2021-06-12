@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bugslife.Controllers;
 
 import bugslife.MainClasses.BugsLife;
-import bugslife.MainClasses.MainPage;
 import bugslife.MainClasses.Project;
 import bugslife.MainClasses.Issue;
-import bugslife.Controllers.ProjectUIController;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -50,10 +42,6 @@ public class IssueUIController implements Initializable {
     private TableColumn<Issue, String> assigneeF;
     @FXML
     private TableColumn<Issue, String> createdByF;
-    @FXML
-    private ImageView backButton;
-    @FXML
-    private ImageView searchButton;
     @FXML
     private TextField searchBar;
     @FXML

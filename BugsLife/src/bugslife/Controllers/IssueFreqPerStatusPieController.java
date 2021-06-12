@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bugslife.Controllers;
 
 import bugslife.MainClasses.BugsLife;
@@ -26,11 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
-/**
- * FXML Controller class
- *
- * @author User
- */
+
 public class IssueFreqPerStatusPieController implements Initializable {
 
     @FXML
@@ -91,12 +82,6 @@ public class IssueFreqPerStatusPieController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
-    /*
-    private static boolean isWithinRange(LocalDate testDate) {
-        return (testDate.isAfter(startDate) && testDate.isBefore(endDate));
-    }
-     */
 
     @FXML
     private void backToIssueUI(MouseEvent event) throws Exception {

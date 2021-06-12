@@ -15,7 +15,9 @@ public class MainPage {
     public List<Project> getProjectsList() {
         return projects;
     }
-    
+    public void addUser(String username,String password){
+        users.add(new User(username,password));
+    }
     public void addProjects(String name){
         projects.add(new Project(name));
         Issue.issueCount = 0;

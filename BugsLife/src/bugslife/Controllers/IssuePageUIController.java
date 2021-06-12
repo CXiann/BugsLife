@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -83,7 +82,25 @@ public class IssuePageUIController implements Initializable {
     @FXML
     private TextField textEditComment;
     @FXML
-    private TextField commentIDReactLabel;
+    private TextField textCommentIDReact;
+    @FXML
+    private Label reactLabel;
+    @FXML
+    private Label titlePrompt;
+    @FXML
+    private Label assigneePrompt;
+    @FXML
+    private Label priorityPrompt;
+    @FXML
+    private Label tagPrompt;
+    @FXML
+    private Label statusPrompt;
+    @FXML
+    private Label desPrompt;
+    @FXML
+    private Label editIdLabel;
+    @FXML
+    private Label addEditCommentLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -118,12 +135,19 @@ public class IssuePageUIController implements Initializable {
     private void editDescription(MouseEvent event) {
         if (!textDes.isVisible()) {
             desText.setVisible(false);
+            textDes.setText("");
             textDes.setVisible(true);
         } else {
-            textDes.setVisible(false);
-            i.updateDescription(textDes.getText());
-            desText.setText("Description: \n" + i.getDescriptionText());
-            desText.setVisible(true);
+            desPrompt.setText("");
+            if (!textDes.getText().isEmpty()) {
+                textDes.setVisible(false);
+                i.updateDescription(textDes.getText());
+                desText.setText("Description: \n" + i.getDescriptionText());
+                desText.setVisible(true);
+                textHistory.setText(i.showHistory());
+            } else {
+                desPrompt.setText("Please do not leave blank!");
+            }
         }
     }
 
@@ -131,12 +155,19 @@ public class IssuePageUIController implements Initializable {
     private void editAssignee(MouseEvent event) {
         if (!textAssignee.isVisible()) {
             assigneeLabel.setVisible(false);
+            textAssignee.setText("");
             textAssignee.setVisible(true);
         } else {
-            textAssignee.setVisible(false);
-            i.updateAssignee(textAssignee.getText());
-            assigneeLabel.setText("Assignee: " + i.getAssignee());
-            assigneeLabel.setVisible(true);
+            assigneePrompt.setText("");
+            if (!textAssignee.getText().isEmpty()) {
+                textAssignee.setVisible(false);
+                i.updateAssignee(textAssignee.getText());
+                assigneeLabel.setText("Assignee: " + i.getAssignee());
+                assigneeLabel.setVisible(true);
+                textHistory.setText(i.showHistory());
+            } else {
+                assigneePrompt.setText("Please do not leave blank!");
+            }
         }
     }
 
@@ -144,12 +175,21 @@ public class IssuePageUIController implements Initializable {
     private void editStatus(MouseEvent event) {
         if (!textStatus.isVisible()) {
             statusLabel.setVisible(false);
+            textStatus.setText("");
             textStatus.setVisible(true);
         } else {
-            textStatus.setVisible(false);
-            i.updateStatus(textStatus.getText());
-            statusLabel.setText("Status: " + i.getStatus());
-            statusLabel.setVisible(true);
+            statusPrompt.setText("");
+            if (!textStatus.getText().isEmpty() && i.canSetStatus(textStatus.getText())) {
+                textStatus.setVisible(false);
+                i.updateStatus(textStatus.getText());
+                statusLabel.setText("Status: " + i.getStatus());
+                statusLabel.setVisible(true);
+                textHistory.setText(i.showHistory());
+            } else if (textStatus.getText().isEmpty()) {
+                statusPrompt.setText("Please do not leave blank!");
+            } else {
+                statusPrompt.setText("Please enter a valid status!");
+            }
         }
     }
 
@@ -157,12 +197,19 @@ public class IssuePageUIController implements Initializable {
     private void editTag(MouseEvent event) {
         if (!textTag.isVisible()) {
             tagLabel.setVisible(false);
+            textTag.setText("");
             textTag.setVisible(true);
         } else {
-            textTag.setVisible(false);
-            i.updateTag(textTag.getText());
-            tagLabel.setText("Tag: " + i.getTag());
-            tagLabel.setVisible(true);
+            tagPrompt.setText("");
+            if (!textTag.getText().isEmpty()) {
+                textTag.setVisible(false);
+                i.updateTag(textTag.getText());
+                tagLabel.setText("Tag: " + i.getTag());
+                tagLabel.setVisible(true);
+                textHistory.setText(i.showHistory());
+            } else {
+                tagPrompt.setText("Please do not leave blank!");
+            }
         }
     }
 
@@ -170,12 +217,19 @@ public class IssuePageUIController implements Initializable {
     private void editPriority(MouseEvent event) {
         if (!textPriority.isVisible()) {
             priorityLabel.setVisible(false);
+            textPriority.setText("");
             textPriority.setVisible(true);
         } else {
-            textPriority.setVisible(false);
-            i.updatePriority(textPriority.getText());
-            priorityLabel.setText("Priority: " + textPriority.getText());
-            priorityLabel.setVisible(true);
+            priorityPrompt.setText("");
+            if (!textPriority.getText().isEmpty()) {
+                textPriority.setVisible(false);
+                i.updatePriority(textPriority.getText());
+                priorityLabel.setText("Priority: " + textPriority.getText());
+                priorityLabel.setVisible(true);
+                textHistory.setText(i.showHistory());
+            } else {
+                priorityPrompt.setText("Please do not leave blank!");
+            }
         }
     }
 
@@ -183,14 +237,19 @@ public class IssuePageUIController implements Initializable {
     private void editTitle(MouseEvent event) {
         if (!textTitle.isVisible()) {
             titleLabel.setVisible(false);
+            textTitle.setText("");
             textTitle.setVisible(true);
         } else {
-            textTitle.setVisible(false);
-            i.updateTitle(textTitle.getText());
-            titleLabel.setText(i.getTitle());
-            titleLabel.setVisible(true);
+            titlePrompt.setText("");
+            if (!textTitle.getText().isEmpty()) {
+                textTitle.setVisible(false);
+                i.updateTitle(textTitle.getText());
+                titleLabel.setText(i.getTitle());
+                titleLabel.setVisible(true);
+            } else {
+                titlePrompt.setText("Please do not leave blank!");
+            }
         }
-
     }
 
     @FXML
@@ -212,31 +271,91 @@ public class IssuePageUIController implements Initializable {
     private void modifyCommentPage(ActionEvent event) {
         if (!commentPagePrompt.isVisible()) {
             commentPagePrompt.setVisible(true);
+            commentIDEditLabel.setVisible(false);
+            angry.setSelected(false);
+            smile.setSelected(false);
+            thumbsUp.setSelected(false);
+            happy.setSelected(false);
+            editComment.setSelected(false);
+            addNewComment.setSelected(false);
+            textCommentIDReact.setText("");
+            textEditComment.setText("");
+            editIdLabel.setText("");
+            reactLabel.setText("");
+            addEditCommentLabel.setText("");
         }
     }
 
     @FXML
     private void backToIssuePageUI(ActionEvent event) {
         if (commentPagePrompt.isVisible()) {
+            boolean cannotEnd = false;
             if (toggleComment.getSelectedToggle() != null) {
-                if (toggleComment.getSelectedToggle().equals(addNewComment) && !textEditComment.getText().isEmpty()) {
+                addEditCommentLabel.setText("");
+                if (textEditComment.getText().isEmpty()) {
+                    cannotEnd = true;
+                    addEditCommentLabel.setText("Please do not leave blank!");
+                } else if (toggleComment.getSelectedToggle().equals(addNewComment)) {
                     i.addComment(LoginPageController.usernameC, textEditComment.getText());
-                } else if (toggleComment.getSelectedToggle().equals(editComment) && !textEditComment.getText().isEmpty() && !commentIDEditLabel.getText().isEmpty()) {
-                    i.updateComment(Integer.parseInt(commentIDEditLabel.getText()), textEditComment.getText());
+                    textHistory.setText(i.showHistory());
+                    textComment.setText(i.getCommentPage());
+                    commentPagePrompt.setVisible(false);
+                } else if (toggleComment.getSelectedToggle().equals(editComment)) {
+                    try {
+                        int commentId = Integer.parseInt(commentIDEditLabel.getText());
+                        if (commentId >= 1 && commentId <= i.getComments().size()) {
+                            i.updateComment(Integer.parseInt(commentIDEditLabel.getText()), textEditComment.getText());
+                            textHistory.setText(i.showHistory());
+                            textComment.setText(i.getCommentPage());
+                            commentIDEditLabel.setText("");
+                            commentPagePrompt.setVisible(false);
+                        } else {
+                            cannotEnd = true;
+                            editIdLabel.setText("Please enter a valid Id!");
+                        }
+                    } catch (Exception ex) {
+                        cannotEnd = true;
+                        editIdLabel.setText("Please enter a valid Id!");
+                    }
                 }
             }
-            if (react.getSelectedToggle() != null) {
-                if (react.getSelectedToggle().equals(angry)) {
-                    i.addReaction(Integer.parseInt(commentIDReactLabel.getText()), "angry");
-                } else if (react.getSelectedToggle().equals(smile)) {
-                    i.addReaction(Integer.parseInt(commentIDReactLabel.getText()), "smile");
-                } else if (react.getSelectedToggle().equals(happy)) {
-                    i.addReaction(Integer.parseInt(commentIDReactLabel.getText()), "happy");
-                } else if (react.getSelectedToggle().equals(thumbsUp)) {
-                    i.addReaction(Integer.parseInt(commentIDReactLabel.getText()), "thumbsUp");
+            if (react.getSelectedToggle() != null && !cannotEnd) {
+                int commentIDReact;
+                try {
+                    commentIDReact = Integer.parseInt(textCommentIDReact.getText());
+                    if (react.getSelectedToggle().equals(angry) && commentIDReact >= 1 && commentIDReact <= i.getComments().size()) {
+                        i.addReaction(commentIDReact, "angry");
+                        textHistory.setText(i.showHistory());
+                        textComment.setText(i.getCommentPage());
+                        textCommentIDReact.setText("");
+                        commentPagePrompt.setVisible(false);
+                    } else if (react.getSelectedToggle().equals(smile) && commentIDReact >= 1 && commentIDReact <= i.getComments().size()) {
+                        i.addReaction(commentIDReact, "smile");
+                        textHistory.setText(i.showHistory());
+                        textComment.setText(i.getCommentPage());
+                        textCommentIDReact.setText("");
+                        commentPagePrompt.setVisible(false);
+                    } else if (react.getSelectedToggle().equals(happy) && commentIDReact >= 1 && commentIDReact <= i.getComments().size()) {
+                        i.addReaction(commentIDReact, "happy");
+                        textHistory.setText(i.showHistory());
+                        textComment.setText(i.getCommentPage());
+                        textCommentIDReact.setText("");
+                        commentPagePrompt.setVisible(false);
+                    } else if (react.getSelectedToggle().equals(thumbsUp) && commentIDReact >= 1 && commentIDReact <= i.getComments().size()) {
+                        i.addReaction(commentIDReact, "thumbsUp");
+                        textHistory.setText(i.showHistory());
+                        textComment.setText(i.getCommentPage());
+                        textCommentIDReact.setText("");
+                        commentPagePrompt.setVisible(false);
+                    } else {
+                        reactLabel.setText("Please enter a valid Id!");
+                    }
+                } catch (Exception ex) {
+                    reactLabel.setText("Please enter a valid Id!");
                 }
+
             }
-            commentPagePrompt.setVisible(false);
+
         }
     }
 
@@ -256,6 +375,11 @@ public class IssuePageUIController implements Initializable {
         happy.setSelected(false);
         editComment.setSelected(false);
         addNewComment.setSelected(false);
+        textCommentIDReact.setText("");
+        textEditComment.setText("");
+        commentIDEditLabel.setText("");
+        editIdLabel.setText("");
+        reactLabel.setText("");
     }
 
 }

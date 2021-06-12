@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class CreateIssueUIController implements Initializable {
@@ -25,8 +24,6 @@ public class CreateIssueUIController implements Initializable {
     private TextField tagF;
     @FXML
     private TextField priorityF;
-    @FXML
-    private JFXButton button;
     @FXML
     private Label priorityLabel;
     @FXML

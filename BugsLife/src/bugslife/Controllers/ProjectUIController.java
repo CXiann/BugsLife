@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bugslife.Controllers;
 
 import bugslife.MainClasses.BugsLife;
+import bugslife.MainClasses.Chatroom;
 import bugslife.MainClasses.MainPage;
 import bugslife.MainClasses.Project;
 import java.net.URL;
@@ -20,7 +16,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -42,6 +37,8 @@ public class ProjectUIController implements Initializable {
     private TextField textProjectName;
     @FXML
     private Label projectPromptLabel;
+    @FXML
+    private AnchorPane logOutPromptPane;
 
     private BugsLife b = new BugsLife();
     private MainPage m = new BugsLife().getM();
@@ -113,5 +110,30 @@ public class ProjectUIController implements Initializable {
             projectPromptLabel.setVisible(false);
             createProjectPane.setVisible(false);
         }
+    }
+
+    @FXML
+    private void openChat(ActionEvent event) {
+        Chatroom chatroom = new Chatroom();     // create a new chatroom
+        chatroom.displayChatroom();             // display chatroom
+    }
+
+    @FXML
+    private void logOut(ActionEvent event) {
+        if (!logOutPromptPane.isVisible()) {
+            logOutPromptPane.setVisible(true);
+        }
+    }
+
+    @FXML
+    private void noButton(ActionEvent event) {
+         if (logOutPromptPane.isVisible()) {
+            logOutPromptPane.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void yesButton(ActionEvent event) throws Exception {
+        b.changeScene("bugslife/FXML/LoginPage.fxml");
     }
 }

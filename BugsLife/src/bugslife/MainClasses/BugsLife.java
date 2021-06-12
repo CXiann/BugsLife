@@ -26,18 +26,6 @@ public class BugsLife extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        /*
-        //Code to use when rerun
-        //Only use when creating another project in exsiting mainpage
-        Project.projectCount =  m.getLastProjectNum();
-        
-        //Only use when creating another issue in exsiting project
-        Issue.issueCount = m.getProjectsList().get(0).getLastIssueNum();
-        
-        //Only use when creating another comment in exsiting issue
-        Comment.commentCount = m.getProjectsList().get(0).getIssue(1).getLastCommentNum();
-         */
-        
         Project.projectCount =  m.getLastProjectNum();
         stg = primaryStage;
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("bugslife/FXML/LoginPage.fxml"));

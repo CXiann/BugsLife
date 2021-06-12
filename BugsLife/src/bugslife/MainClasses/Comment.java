@@ -19,7 +19,6 @@ public class Comment {
     public Comment(String user, String text) {
         this.text = text;
         this.user = user;
-        this.commentId = commentId;
         this.timestamp = Instant.now().getEpochSecond();
         commentCount++;
         commentId = commentCount;
@@ -32,12 +31,13 @@ public class Comment {
     }
 
     public String getAllReactionsData() {
-        String s = "Reactions\n";
+        String s = "\nReactions\n";
         for (int i = 0; i < react.size(); i++) {
             if (react.get(i).getCount() != 0) {
                 s += react.get(i).getCount() + " people react with " + react.get(i).getReaction() + "\n";
             }
         }
+        s += "--------------------------------------------------------------------------------------------------\n";
         return s;
     }
 
@@ -76,17 +76,11 @@ public class Comment {
         return formatDate(timestamp);
     }
 
-    /**
-     * Changed ** public String getTimestamp() { ft =new
-     * SimpleDateFormat("yyyy/MM/dd kk:mm:ss"); return
-     * ft.format(timestampComment); }
-     */
     public String toString() {
         String s = "#" + this.getCommentId() + "\tCreated on: " + this.getTimestamp() + "\tBy: " + this.getUser() + "\n"
                 + this.getText() + "\n"
                 + this.getAllReactionsData() + "\n";
         return s;
-
     }
 
     private static String formatDate(long date) {
@@ -100,19 +94,4 @@ public class Comment {
         return formattedDate;
     }
 
-    /*    
-    public String getReactionType(String s) {
-        int index = getIndex(s);
-        React r = reaction.get(index);
-        return r.getReaction();
-    }
-
-    public int getReactionCount(String s) {
-        int index = getIndex(s);
-        React r = reaction.get(index);
-        return r.getCount();
-    }
-
-    
-     */
 }

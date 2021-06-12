@@ -14,6 +14,7 @@ public class Update {
     private String oldAssignee, newAssignee;
     private String oldStatus,newStatus;
     private int oldPriority, newPriority;
+    private String reactType;
     private String titleU;
     private String commentTextU;
     private String commentUserU;
@@ -21,9 +22,14 @@ public class Update {
     private int commentIdU;
     private long timeU;
 
-    public Update(int commentIdU, String commentU, long time) {    //update comment
-        this.commentU = commentU;
-        this.commentIdU = ++commentIdU;
+    public Update(int id, String str, long time, char c) {    //update comment,add reaction
+        this.c = c;
+        if (c == 'u') {
+            this.commentU = str;
+        } else if (c == 'r') {
+            this.reactType = str;
+        }
+        this.commentIdU = id;
         this.timeU = time;
         updateNumber = ++updateCount;
     }
@@ -95,6 +101,10 @@ public class Update {
 
     public String getNewTag() {
         return newTag;
+    }
+
+    public String getReactType() {
+        return reactType;
     }
 
     public String getOldAssignee() {

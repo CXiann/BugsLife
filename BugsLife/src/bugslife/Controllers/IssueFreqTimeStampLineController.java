@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bugslife.Controllers;
 
 import bugslife.MainClasses.BugsLife;
@@ -10,13 +5,9 @@ import bugslife.MainClasses.MainPage;
 import bugslife.MainClasses.Project;
 import bugslife.MainClasses.Issue;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

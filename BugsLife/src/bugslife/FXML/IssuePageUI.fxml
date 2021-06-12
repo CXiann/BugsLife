@@ -68,7 +68,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXTabPane>
-      <AnchorPane layoutX="139.0" layoutY="30.0" prefHeight="45.0" prefWidth="203.0">
+      <AnchorPane layoutX="139.0" layoutY="15.0" prefHeight="45.0" prefWidth="203.0">
          <children>
             <Label fx:id="idLabel" layoutY="-2.0" prefHeight="46.0" prefWidth="203.0" text="Issue #1">
                <font>
@@ -153,7 +153,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="186.0" prefWidth="990.0">
                      <children>
-                        <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="51.0" prefWidth="447.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
+                        <AnchorPane layoutX="20.0" layoutY="10.0" prefHeight="51.0" prefWidth="447.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="assigneeLabel" layoutX="10.0" layoutY="-1.0" prefHeight="46.0" prefWidth="386.0" text="Assignee: jhoe">
                                  <font>
@@ -185,7 +185,7 @@
                               <DropShadow color="#b7b7b7" height="28.14" offsetY="8.0" radius="7.0175" width="1.93" />
                            </effect>
                         </AnchorPane>
-                        <AnchorPane layoutX="20.0" layoutY="100.0" prefHeight="51.0" prefWidth="446.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
+                        <AnchorPane layoutX="20.0" layoutY="90.0" prefHeight="51.0" prefWidth="446.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="statusLabel" layoutX="10.0" layoutY="-1.0" prefHeight="46.0" prefWidth="380.0" text="Status: Open">
                                  <font>
@@ -217,7 +217,7 @@
                               <DropShadow color="#b7b7b7" height="28.14" offsetY="8.0" radius="7.0175" width="1.93" />
                            </effect>
                         </AnchorPane>
-                        <AnchorPane layoutX="500.0" layoutY="20.0" prefHeight="46.0" prefWidth="400.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
+                        <AnchorPane layoutX="500.0" layoutY="10.0" prefHeight="46.0" prefWidth="400.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="tagLabel" layoutX="10.0" layoutY="-1.0" prefHeight="46.0" prefWidth="383.0" text="Tag: backend">
                                  <font>
@@ -249,7 +249,7 @@
                               <DropShadow color="#b7b7b7" height="28.14" offsetY="8.0" radius="7.0175" width="1.93" />
                            </effect>
                         </AnchorPane>
-                        <AnchorPane layoutX="500.0" layoutY="100.0" prefHeight="46.0" prefWidth="400.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
+                        <AnchorPane layoutX="500.0" layoutY="90.0" prefHeight="46.0" prefWidth="400.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="priorityLabel" layoutX="10.0" layoutY="-1.0" prefHeight="46.0" prefWidth="377.0" text="Priority: 1">
                                  <font>
@@ -290,7 +290,7 @@
           </TitledPane>
         </panes>
       </Accordion>
-      <AnchorPane layoutX="129.0" layoutY="72.0" prefHeight="45.0" prefWidth="988.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
+      <AnchorPane layoutX="129.0" layoutY="55.0" prefHeight="45.0" prefWidth="988.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
          <children>
             <Label fx:id="titleLabel" layoutX="10.0" prefHeight="46.0" prefWidth="900.0">
                <font>
@@ -319,16 +319,16 @@
             <DropShadow color="#b7b7b7" height="28.14" offsetY="8.0" radius="7.0175" width="1.93" />
          </effect>
       </AnchorPane>
-      <AnchorPane layoutX="800.0" layoutY="30.0" prefHeight="45.0" prefWidth="389.0">
+      <AnchorPane layoutX="800.0" layoutY="15.0" prefHeight="46.0" prefWidth="322.0">
          <children>
-            <Label fx:id="createdByLabel" layoutY="-2.0" prefHeight="46.0" prefWidth="394.0" text="Created By: ang">
+            <Label fx:id="createdByLabel" layoutY="-2.0" prefHeight="46.0" prefWidth="334.0" text="Created By: ang">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="400.0" layoutY="32.0" prefHeight="36.0" prefWidth="234.0">
+      <AnchorPane layoutX="400.0" layoutY="15.0" prefHeight="36.0" prefWidth="234.0">
          <children>
             <Label fx:id="createDateLabel" layoutX="1.0" layoutY="-2.0" prefHeight="46.0" prefWidth="301.0" text="Created On: 2019/1/12 12:00:00">
                <font>
@@ -345,6 +345,36 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Label fx:id="titlePrompt" layoutX="140.0" layoutY="113.0" prefHeight="25.0" prefWidth="500.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="assigneePrompt" layoutX="155.0" layoutY="283.0" prefHeight="26.0" prefWidth="438.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="priorityPrompt" layoutX="630.0" layoutY="365.0" prefHeight="26.0" prefWidth="438.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="tagPrompt" layoutX="630.0" layoutY="283.0" prefHeight="26.0" prefWidth="438.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="statusPrompt" layoutX="155.0" layoutY="365.0" prefHeight="26.0" prefWidth="438.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="desPrompt" layoutX="280.0" layoutY="147.0" prefHeight="25.0" prefWidth="500.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
       <AnchorPane fx:id="commentPagePrompt" layoutX="300.0" layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFB6C1;" visible="false">
          <children>
             <JFXButton layoutX="480.0" layoutY="355.0" onAction="#backToIssuePageUI" prefHeight="0.0" prefWidth="100.0" style="-fx-background-color: #9932CC;" text="OK" textFill="WHITE">
@@ -368,12 +398,12 @@
                   <Font size="14.0" />
                </font>
             </RadioButton>
-            <TextField fx:id="commentIDEditLabel" layoutX="314.0" layoutY="13.0" promptText="Enter comment ID" visible="false">
+            <TextField fx:id="commentIDEditLabel" layoutX="314.0" layoutY="12.0" promptText="Enter comment ID" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <ScrollPane layoutX="14.0" layoutY="50.0" prefHeight="232.0" prefWidth="571.0">
+            <ScrollPane layoutX="14.0" layoutY="61.0" prefHeight="221.0" prefWidth="571.0">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="569.0">
                      <children>
@@ -444,14 +474,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <TextField fx:id="commentIDReactLabel" layoutX="30.0" layoutY="350.0" prefHeight="38.0" prefWidth="192.0" promptText="Enter comment ID to react">
+            <TextField fx:id="textCommentIDReact" layoutX="30.0" layoutY="340.0" prefHeight="29.0" prefWidth="192.0" promptText="Enter comment ID to react">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
             <AnchorPane layoutX="320.0" layoutY="360.0" onMouseClicked="#cleartoggles">
                <children>
-                  <Label prefHeight="35.0" prefWidth="97.0" text="Clear toggles" underline="true" wrapText="true">
+                  <Label prefHeight="35.0" prefWidth="97.0" text="Reset All" underline="true" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -461,6 +491,21 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
+            <Label fx:id="reactLabel" layoutX="32.0" layoutY="375.0" prefWidth="250.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="editIdLabel" layoutX="318.0" layoutY="40.0" prefHeight="22.0" prefWidth="188.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="addEditCommentLabel" layoutX="35.0" layoutY="40.0" prefHeight="22.0" prefWidth="188.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
