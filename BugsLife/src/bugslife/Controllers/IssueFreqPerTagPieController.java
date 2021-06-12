@@ -26,7 +26,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
-
 public class IssueFreqPerTagPieController implements Initializable {
 
     @FXML
@@ -36,27 +35,27 @@ public class IssueFreqPerTagPieController implements Initializable {
     @FXML
     private Label label;
 
-    //int total = 0;
+    private int total = 0;
     private BugsLife bug = new BugsLife();
-    private MainPage mainP = bug.getM(); 
-   
+    private MainPage mainP = bug.getM();
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        //Issue_Tag.getData().clear();
-        List<Project> p = mainP.getProjectsList();
+        button.setVisible(false);
+        Project p = ProjectUIController.selectedProject;
         List<String> list2 = new ArrayList<>();
-        for (int j = 0; j < p.size(); j++) {
-            List<Issue> issue = p.get(j).getIssuesList();
-            for (int i = 0; i < issue.size(); i++) {
-                list2.add(issue.get(i).getTag());
-            }
+
+        List<Issue> issue = p.getIssuesList();
+        for (int i = 0; i < issue.size(); i++) {
+            list2.add(issue.get(i).getTag());
         }
+
         TreeMap<String, Integer> tmap = countFrequencies(list2);
 
         ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
         for (Map.Entry m : tmap.entrySet()) {
             list.add(new PieChart.Data((String) m.getKey(), (Integer) m.getValue()));
-            //total += (Integer) m.getValue();
+            total += (Integer) m.getValue();
         }
 
         Issue_Tag.setData(list);
@@ -65,13 +64,18 @@ public class IssueFreqPerTagPieController implements Initializable {
             data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    label.setText((Double.toString(data.getPieValue())));
+                    label.setText(Integer.toString((int)data.getPieValue())+" Issue(s)("+(data.getPieValue() / total * 100)+"%), Total issue(s) = "+total);
                 }
             });
         }
 
     }
 
+    @FXML
+    private void backToIssueUI(MouseEvent event) throws Exception {
+        bug.changeScene("bugslife/FXML/IssueUI.fxml");
+    }
+    
     public static TreeMap countFrequencies(List<String> list) {
         TreeMap<String, Integer> tmap = new TreeMap<String, Integer>();
         for (String t : list) {
@@ -85,5 +89,6 @@ public class IssueFreqPerTagPieController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+
 
 }

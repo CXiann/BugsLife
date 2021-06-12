@@ -8,15 +8,17 @@ public class Update {
     private transient char c;
     protected transient static int updateCount = 0;
     private int updateNumber;
-    private String projectNameU;
+    private String oldTitle, newTitle;
+    private String oldDes, newDes;
+    private String oldTag, newTag;
+    private String oldAssignee, newAssignee;
+    private String oldStatus,newStatus;
+    private int oldPriority, newPriority;
     private String titleU;
-    private String commentTitleCreatedU;
-    private String commentUserCreatedU;
+    private String commentTextU;
+    private String commentUserU;
     private String commentU;
     private int commentIdU;
-    private String statusBefore;
-    private String statusU;
-//    private Date timeU;
     private long timeU;
 
     public Update(int commentIdU, String commentU, long time) {    //update comment
@@ -26,59 +28,105 @@ public class Update {
         updateNumber = ++updateCount;
     }
 
-    public Update(String commentTitleCreatedU, String commentUserCreatedU, long timeU, char c) {       //create comment
+    public Update(String first, String second, long timeU, char c) {       //create comment & updating issue title,description,tag,status,priority,assignee
         this.c = c;
-        this.commentTitleCreatedU = commentTitleCreatedU;
-        this.commentUserCreatedU = commentUserCreatedU;
+        if (c == 't') {
+            this.oldTitle = first;
+            this.newTitle = second;
+        } else if (c == 'd') {
+            this.oldDes = first;
+            this.newDes = second;
+        } else if (c == 'a') {
+            this.oldAssignee = first;
+            this.newAssignee = second;
+        } else if (c == 'g') {
+            this.oldTag = first;
+            this.newTag = second;
+        }else if (c == 's') {
+            this.oldStatus = first;
+            this.newStatus = second;
+        }else if (c == 'c') {
+            this.commentTextU = first;
+            this.commentUserU = second;
+        }
         this.timeU = timeU;
         updateNumber = ++updateCount;
+        this.commentTextU = first;
+        this.commentUserU = second;
     }
 
-    public Update(String titleU, long time, char c) {  //creating issue
-        this.titleU = titleU;
+    public Update(int first, int second, long time, char c) {       //update priority
+        this.oldPriority = first;
+        this.newPriority = second;
         this.c = c;
         this.timeU = time;
         updateNumber = ++updateCount;
     }
 
-    public Update(String projectNameU, long time) {   //creating project
+    public Update(String titleU, long time) {  //creating issue
+        this.titleU = titleU;
         this.timeU = time;
-        this.projectNameU = projectNameU;
         updateNumber = ++updateCount;
-    }
-
-    public Update(String statusB, String statusU, long time) {    //update status
-        this.statusU = statusU;
-        this.timeU = time;
-        this.statusBefore = statusB;
-        updateNumber = ++updateCount;
-    }
-
-    public String getProjectNameU() {
-        return projectNameU;
     }
 
     public int getUpdateNumber() {
         return updateNumber;
     }
 
-//    public Date getTimeU() {
-//        return timeU;
-//    }
     public String getTimeU() {
         return formatDate(timeU);
     }
 
-    public String getStatusBefore() {
-        return statusBefore;
+    public String getOldStatus() {
+        return oldStatus;
     }
 
-    public String getCommentTitleCreatedU() {
-        return commentTitleCreatedU;
+    public String getCommentTextU() {
+        return commentTextU;
     }
 
-    public String getCommentUserCreatedU() {
-        return commentUserCreatedU;
+    public String getCommentUserU() {
+        return commentUserU;
+    }
+
+    public String getOldTag() {
+        return oldTag;
+    }
+
+    public String getNewTag() {
+        return newTag;
+    }
+
+    public String getOldAssignee() {
+        return oldAssignee;
+    }
+
+    public String getNewAssignee() {
+        return newAssignee;
+    }
+
+    public int getOldPriority() {
+        return oldPriority;
+    }
+
+    public int getNewPriority() {
+        return newPriority;
+    }
+
+    public String getOldDes() {
+        return oldDes;
+    }
+
+    public String getNewDes() {
+        return newDes;
+    }
+
+    public String getOldTitle() {
+        return oldTitle;
+    }
+
+    public String getNewTitle() {
+        return newTitle;
     }
 
     public String getTitleU() {
@@ -93,8 +141,8 @@ public class Update {
         return commentU;
     }
 
-    public String getStatusU() {
-        return statusU;
+    public String getNewStatus() {
+        return newStatus;
     }
 
     public int getCommentIdU() {

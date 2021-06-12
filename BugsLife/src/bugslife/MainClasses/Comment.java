@@ -9,20 +9,17 @@ import java.util.List;
 
 public class Comment {
 
-    protected transient static int commentCount = 0;
+    public transient static int commentCount = 0;
     private int commentId;
     protected String text;
     private List<React> react = new ArrayList<>(Arrays.asList(new React("angry"), new React("happy"), new React("thumbsUp"), new React("smile")));
-//    private Date timestamp;
     private long timestamp;
     private String user;
-//    private SimpleDateFormat ft;
 
     public Comment(String user, String text) {
         this.text = text;
         this.user = user;
         this.commentId = commentId;
-//        this.timestamp = new Date();
         this.timestamp = Instant.now().getEpochSecond();
         commentCount++;
         commentId = commentCount;
@@ -35,7 +32,7 @@ public class Comment {
     }
 
     public String getAllReactionsData() {
-        String s = "$$\n";
+        String s = "Reactions\n";
         for (int i = 0; i < react.size(); i++) {
             if (react.get(i).getCount() != 0) {
                 s += react.get(i).getCount() + " people react with " + react.get(i).getReaction() + "\n";
@@ -75,9 +72,6 @@ public class Comment {
         return commentId;
     }
 
-//    public Date getTimestamp() {
-//        return timestamp;
-//    }
     public String getTimestamp() {
         return formatDate(timestamp);
     }

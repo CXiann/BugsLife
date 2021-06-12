@@ -12,48 +12,29 @@ import java.util.regex.Pattern;
 
 public class Project {
 
-    protected transient static Integer projectCount = 0;
+    public transient static Integer projectCount = 0;
     private Integer id;
     private String name;
     ArrayList<Issue> issues = new ArrayList<>();
-//    private Date projectTime;
     private long projectTime;
-    //private transient SimpleDateFormat ft; 
-    //ArrayList<Update> history = new ArrayList<>();                              
-    //dunno how to implement update for creating project(diif. class)           
 
     public Project(String projectName) {
         this.name = projectName;
         id = ++projectCount;
         projectTime = Instant.now().getEpochSecond();
-//        projectTime = new Date();
-        //history.add(new Update(name, this.getProjectTime()));
     }
 
-    public void createIssue(String issueTitle, String issueDescrip, String tag, int priority, String status, String creatorUser, String assigneeUser) {
+    public void createIssue(String issueTitle, String issueDescrip, String tag, int priority, String creatorUser, String assigneeUser) {
         Update.updateCount = 0; //reset static updateCount before creating new issue
-        issues.add(new Issue(issueTitle, issueDescrip, tag, priority, status, creatorUser, assigneeUser));
+        issues.add(new Issue(issueTitle, issueDescrip, tag, priority, "Open", creatorUser, assigneeUser));
     }
 
-//    public void printProject() {
-//        System.out.println(this.getProjectId() + "\t\t" + this.getProjectName() + "\t\t" + this.issues.size() + "\n");
-//    }
-//    public void printAllIssues() {
-//        for (Issue i : issues) {
-//            i.printSingleIssue();
-//        }
-//    }
     public String[] printProject() {
         String str = this.getProjectId() + "," + this.getName() + "," + this.issues.size();
         String[] print = str.split(",", 0);
         return print;
     }
 
-//    public void printAllIssues() {
-//        for (Issue i : issues) {
-//            i.printSingleIssue();
-//        }
-//    }
     /**
      * search issueTitle,issueDescription,issueComment for matching keywords
      *
@@ -64,7 +45,7 @@ public class Project {
         List<Issue> match = new ArrayList<>();
         for (Issue i : issues) {
             if (isContain(i.getTitle(), searchString) || isContain(i.getDescriptionText(), searchString)
-                    || isCommentContain(i.getComments(), searchString)) {
+                    || isCommentContain(i.getComments(), searchString) || isContain(i.getTag(), searchString)) {
                 match.add(i);
             }
         }
@@ -113,15 +94,20 @@ public class Project {
         this.issues = issues;
     }
 
-//    public void setProjectTime(Date projectTime) {
-//        this.projectTime = projectTime;
-//    }
     public void setProjectTime(long projectTime) {
         this.projectTime = projectTime;
     }
 
     public List<Issue> getIssuesList() {
         return issues;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public int getIssueCount() {
+        return issues.size();
     }
 
     public Issue getIssue(int issueId) {
@@ -140,14 +126,6 @@ public class Project {
         return name;
     }
 
-    //** Changed **
-//    public String getTimestamp() {
-//        ft = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-//        return ft.format(projectTime);
-//    }
-//    public Date getProjectTime() {
-//        return projectTime;
-//    }
     public String getProjectTime() {
         return formatDate(projectTime);
     }

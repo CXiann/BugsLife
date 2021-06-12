@@ -73,15 +73,15 @@
             },
             {
               "updateNumber": 2,
-              "commentTitleCreatedU": "Please find below links to the two .pbix files I\u0027ve created in an attempt toconquer this error I\u0027m receiving.",
-              "commentUserCreatedU": "liew",
+              "commentTextU": "Please find below links to the two .pbix files I\u0027ve created in an attempt toconquer this error I\u0027m receiving.",
+              "commentUserU": "liew",
               "commentIdU": 0,
               "timeU": 1622128999
             },
             {
               "updateNumber": 3,
-              "commentTitleCreatedU": "Try this https://www.dropbox.com/home?preview\u003dRelationships.pbix\n\nJust I removed the relationship between sheet1 and sheet1BridgingTable, sheet2 and sheet2BrdgingTable",
-              "commentUserCreatedU": "ang",
+              "commentTextU": "Try this https://www.dropbox.com/home?preview\u003dRelationships.pbix\n\nJust I removed the relationship between sheet1 and sheet1BridgingTable, sheet2 and sheet2BrdgingTable",
+              "commentUserU": "ang",
               "commentIdU": 0,
               "timeU": 1622128999
             }
@@ -180,22 +180,22 @@
             },
             {
               "updateNumber": 2,
-              "commentTitleCreatedU": "I am having the same issue with a disc of photos from Christmas given to me by my sister. I have tried opening all of the photos with all of my available opening options and still get the same message as above poster. ",
-              "commentUserCreatedU": "liew",
+              "commentTextU": "I am having the same issue with a disc of photos from Christmas given to me by my sister. I have tried opening all of the photos with all of my available opening options and still get the same message as above poster. ",
+              "commentUserU": "liew",
               "commentIdU": 0,
               "timeU": 1622128999
             },
             {
               "updateNumber": 3,
-              "commentTitleCreatedU": "lad photos of windows 8 \u0026 10 are worst possible application ever developed!\n\n                    just change default view to \"windows photo viewer\" if you dont have any other application",
-              "commentUserCreatedU": "btan",
+              "commentTextU": "lad photos of windows 8 \u0026 10 are worst possible application ever developed!\n\n                    just change default view to \"windows photo viewer\" if you dont have any other application",
+              "commentUserU": "btan",
               "commentIdU": 0,
               "timeU": 1622128999
             },
             {
               "updateNumber": 4,
-              "commentTitleCreatedU": "Window 10 can but window vista does not work",
-              "commentUserCreatedU": "ang",
+              "commentTextU": "Window 10 can but window vista does not work",
+              "commentUserU": "ang",
               "commentIdU": 0,
               "timeU": 1622128999
             }
@@ -301,22 +301,22 @@
             },
             {
               "updateNumber": 2,
-              "commentTitleCreatedU": "Here is what I am referring to: https://streamable.com/hkyg3 Apologies for not posting a video when creating the issue! ",
-              "commentUserCreatedU": "liew",
+              "commentTextU": "Here is what I am referring to: https://streamable.com/hkyg3 Apologies for not posting a video when creating the issue! ",
+              "commentUserU": "liew",
               "commentIdU": 0,
               "timeU": 1622128999
             },
             {
               "updateNumber": 3,
-              "commentTitleCreatedU": "Thanks for video, seems interesting, weirdly enough I couldn\u0027t reproduce.\nWill see what can be done.",
-              "commentUserCreatedU": "ang",
+              "commentTextU": "Thanks for video, seems interesting, weirdly enough I couldn\u0027t reproduce.\nWill see what can be done.",
+              "commentUserU": "ang",
               "commentIdU": 0,
               "timeU": 1622128999
             },
             {
               "updateNumber": 4,
-              "commentTitleCreatedU": "Thanks for everything",
-              "commentUserCreatedU": "jhoe",
+              "commentTextU": "Thanks for everything",
+              "commentUserU": "jhoe",
               "commentIdU": 0,
               "timeU": 1622128999
             }
@@ -391,15 +391,15 @@
             },
             {
               "updateNumber": 2,
-              "commentTitleCreatedU": "Still a problem. ",
-              "commentUserCreatedU": "btan",
+              "commentTextU": "Still a problem. ",
+              "commentUserU": "btan",
               "commentIdU": 0,
               "timeU": 1622128999
             },
             {
               "updateNumber": 3,
-              "commentTitleCreatedU": "/cc @clarkdo",
-              "commentUserCreatedU": "ang",
+              "commentTextU": "/cc @clarkdo",
+              "commentUserU": "ang",
               "commentIdU": 0,
               "timeU": 1622128999
             }
@@ -481,15 +481,15 @@
             },
             {
               "updateNumber": 2,
-              "commentTitleCreatedU": "To: https://streamable.com/hkyg3 Apologies for not posting a video when creating the issue!",
-              "commentUserCreatedU": "liew",
+              "commentTextU": "To: https://streamable.com/hkyg3 Apologies for not posting a video when creating the issue!",
+              "commentUserU": "liew",
               "commentIdU": 0,
               "timeU": 1622128999
             },
             {
               "updateNumber": 3,
-              "commentTitleCreatedU": "Thanks for video, seems interesting, weirdly enough I couldn\u0027t reproduce.\nWill see what can be done.",
-              "commentUserCreatedU": "ang",
+              "commentTextU": "Thanks for video, seems interesting, weirdly enough I couldn\u0027t reproduce.\nWill see what can be done.",
+              "commentUserU": "ang",
               "commentIdU": 0,
               "timeU": 1622128999
             }

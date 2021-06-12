@@ -10,8 +10,6 @@ import bugslife.MainClasses.MainPage;
 import bugslife.MainClasses.Project;
 import bugslife.MainClasses.Issue;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,24 +42,27 @@ public class IssueFreqPerStatusPieController implements Initializable {
 
     private BugsLife bug = new BugsLife();
     private MainPage mainP = bug.getM();
+    private int total = 0;
 
     //static LocalDate startDate = LocalDate.of(2021, Month.MAY, 25);
     //static LocalDate endDate = LocalDate.of(2021, Month.MAY, 27);
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        List<Project> P = mainP.getProjectsList();
+        button.setVisible(false);
+        Project p = ProjectUIController.selectedProject;
         List<String> list2 = new ArrayList<>();
-        for (int j = 0; j < P.size(); j++) {
-            List<Issue> issue = P.get(j).getIssuesList();
-            for (int i = 0; i < issue.size(); i++) {
-                list2.add(issue.get(i).getStatus());
-            }
+
+        List<Issue> issue = p.getIssuesList();
+        for (int i = 0; i < issue.size(); i++) {
+            list2.add(issue.get(i).getStatus());
         }
+
         TreeMap<String, Integer> tmap = countFrequencies(list2);
 
         ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
         for (Map.Entry m : tmap.entrySet()) {
             list.add(new PieChart.Data((String) m.getKey(), (Integer) m.getValue()));
+            total += (Integer) m.getValue();
         }
 
         Issue_Status.setData(list);
@@ -70,7 +71,7 @@ public class IssueFreqPerStatusPieController implements Initializable {
             data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    label.setText((Double.toString(data.getPieValue())));
+                    label.setText(Integer.toString((int) data.getPieValue()) + " Issue(s)(" + (data.getPieValue() / total * 100) + "%), Total issue(s) = " + total);
                 }
             });
         }
@@ -90,9 +91,15 @@ public class IssueFreqPerStatusPieController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+
     /*
     private static boolean isWithinRange(LocalDate testDate) {
         return (testDate.isAfter(startDate) && testDate.isBefore(endDate));
     }
-*/
+     */
+
+    @FXML
+    private void backToIssueUI(MouseEvent event) throws Exception {
+        bug.changeScene("bugslife/FXML/IssueUI.fxml");
+    }
 }

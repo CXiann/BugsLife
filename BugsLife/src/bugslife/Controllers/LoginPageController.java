@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package bugslife.Controllers;
 
 import bugslife.MainClasses.BugsLife;
@@ -20,10 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Wen
- */
+
 public class LoginPageController {
 
     @FXML
@@ -34,28 +27,23 @@ public class LoginPageController {
     private TextField usernameF;
     @FXML
     private TextField passwordF;
-
+    
+    private BugsLife b = new BugsLife();
     public static String usernameC, passwordC;
-    @FXML
-    private ImageView cross;
+    
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception {
 
         usernameC = usernameF.getText();
         passwordC = passwordF.getText();
         if (BugsLife.canLogin(usernameC, passwordC)) {
-            BugsLife.stg.close();
-            //BugsLife main = new BugsLife();
-            //main.closeWindow();
+            b.changeScene("bugslife/FXML/ProjectUI.fxml");
         }
         else if (usernameC.isEmpty() || passwordC.isEmpty()) {
             wrongLabel.setText("Please fill up your data");
         }else{
             wrongLabel.setText("You have entered wrong username or password!!");
         }
-        System.out.println("Username : " + usernameC);
-        System.out.println("Password : " + passwordC);
-        
     }
 
     @FXML
