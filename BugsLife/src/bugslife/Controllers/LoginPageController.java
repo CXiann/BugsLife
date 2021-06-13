@@ -4,6 +4,7 @@ import bugslife.MainClasses.BugsLife;
 import bugslife.MainClasses.User;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -47,7 +48,7 @@ public class LoginPageController {
 
     @FXML
     private void close(MouseEvent event) {
-        System.exit(0);
+        Platform.exit();
     }
 
     @FXML

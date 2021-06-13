@@ -6,6 +6,7 @@ import bugslife.MainClasses.MainPage;
 import bugslife.MainClasses.Project;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -75,7 +76,7 @@ public class ProjectUIController implements Initializable {
 
     @FXML
     private void close(MouseEvent event) {
-        System.exit(0);
+        Platform.exit();
     }
 
     @FXML

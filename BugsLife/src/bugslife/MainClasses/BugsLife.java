@@ -32,7 +32,11 @@ public class BugsLife extends Application {
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
-        //serialize(m);
+    }
+    
+    @Override
+    public void stop(){
+        serialize(m);
     }
 
     public void changeScene(String fxml) throws IOException {

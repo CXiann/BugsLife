@@ -7,6 +7,7 @@ import bugslife.MainClasses.Project;
 import com.jfoenix.controls.JFXRadioButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -128,7 +129,7 @@ public class IssuePageUIController implements Initializable {
 
     @FXML
     private void close(MouseEvent event) {
-        System.exit(0);
+        Platform.exit();
     }
 
     @FXML

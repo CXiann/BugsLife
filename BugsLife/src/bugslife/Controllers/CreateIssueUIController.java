@@ -38,11 +38,6 @@ public class CreateIssueUIController implements Initializable {
     }
 
     @FXML
-    private void close(MouseEvent event) {
-        System.exit(0);
-    }
-
-    @FXML
     private void createIssueBackToIssueUI(ActionEvent event) throws Exception {
         int priorityInt = 0;
         boolean proceed = true;
