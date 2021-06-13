@@ -23,6 +23,7 @@ public class BugsLife extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        User.userCount = m.getLastUserCount();
         Project.projectCount =  m.getLastProjectNum();
         stg = primaryStage;
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("bugslife/FXML/LoginPage.fxml"));
@@ -38,7 +39,7 @@ public class BugsLife extends Application {
     public void stop(){
         serialize(m);
     }
-
+    
     public void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource(fxml));
         stg.getScene().setRoot(pane);

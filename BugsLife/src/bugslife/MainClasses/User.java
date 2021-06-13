@@ -2,7 +2,7 @@
 package bugslife.MainClasses;
 
 public class User {
-    private transient static int userCount = 0;
+    public transient static int userCount = 0;
     private Integer userid;
     private String username;
     private String password;

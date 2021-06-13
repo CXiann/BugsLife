@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -102,6 +103,20 @@ public class IssuePageUIController implements Initializable {
     private Label editIdLabel;
     @FXML
     private Label addEditCommentLabel;
+    
+    String loginUser = LoginPageController.usernameC;
+    @FXML
+    private AnchorPane editDesPane;
+    @FXML
+    private AnchorPane editAssigneePane;
+    @FXML
+    private AnchorPane editStatusPane;
+    @FXML
+    private AnchorPane editTagPane;
+    @FXML
+    private AnchorPane editTitlePane;
+    @FXML
+    private AnchorPane editPriorityPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -115,6 +130,18 @@ public class IssuePageUIController implements Initializable {
         tagLabel.setText("Tag: " + i.getTag());
         assigneeLabel.setText("Assignee: " + i.getAssignee());
         desText.setText("Description:\n" + i.getDescriptionText());
+        if (loginUser.equals(i.getAssignee()) ) {
+            editStatusPane.setVisible(true);
+        }
+        else if (loginUser.equals(i.getCreatedBy())) {
+            editAssigneePane.setVisible(true);
+            editDesPane.setVisible(true);
+            editStatusPane.setVisible(true);
+            editTagPane.setVisible(true);
+            editTitlePane.setVisible(true);
+            editPriorityPane.setVisible(true);
+        }
+        
         editComment.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() > 0) {
                 commentIDEditLabel.setVisible(true);
@@ -304,12 +331,15 @@ public class IssuePageUIController implements Initializable {
                 } else if (toggleComment.getSelectedToggle().equals(editComment)) {
                     try {
                         int commentId = Integer.parseInt(commentIDEditLabel.getText());
-                        if (commentId >= 1 && commentId <= i.getComments().size()) {
+                        if (commentId >= 1 && commentId <= i.getComments().size() && loginUser.equals(i.getComment(commentId - 1).getUser())) {
                             i.updateComment(Integer.parseInt(commentIDEditLabel.getText()), textEditComment.getText());
                             textHistory.setText(i.showHistory());
                             textComment.setText(i.getCommentPage());
                             commentIDEditLabel.setText("");
                             commentPagePrompt.setVisible(false);
+                        } else if (!loginUser.equals(i.getComment(commentId - 1).getUser())) {
+                            cannotEnd = true;
+                            editIdLabel.setText("You cannot edit the comment");
                         } else {
                             cannotEnd = true;
                             editIdLabel.setText("Please enter a valid Id!");

@@ -110,7 +110,7 @@
                            <content>
                               <AnchorPane prefHeight="2000.0" prefWidth="982.0" style="-fx-background-color: #F5F5DC; -fx-background-radius: 15; -fx-border-radius: 15;">
                                  <children>
-                                    <AnchorPane layoutX="925.0" onMouseClicked="#editDescription">
+                                    <AnchorPane fx:id="editDesPane" layoutX="925.0" onMouseClicked="#editDescription" visible="false">
                                        <children>
                                           <ImageView fitHeight="40.0" fitWidth="40.0">
                                              <image>
@@ -160,7 +160,7 @@
                                     <Font size="30.0" />
                                  </font>
                               </Label>
-                              <AnchorPane layoutX="400.0" onMouseClicked="#editAssignee">
+                              <AnchorPane fx:id="editAssigneePane" layoutX="400.0" onMouseClicked="#editAssignee" visible="false">
                                  <children>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#editAssignee">
                                        <image>
@@ -192,7 +192,7 @@
                                     <Font size="30.0" />
                                  </font>
                               </Label>
-                              <AnchorPane layoutX="400.0" onMouseClicked="#editStatus">
+                              <AnchorPane fx:id="editStatusPane" layoutX="400.0" onMouseClicked="#editStatus" visible="false">
                                  <children>
                                     <ImageView fitHeight="40.0" fitWidth="40.0">
                                        <image>
@@ -224,7 +224,7 @@
                                     <Font size="30.0" />
                                  </font>
                               </Label>
-                              <AnchorPane layoutX="400.0" onMouseClicked="#editTag">
+                              <AnchorPane fx:id="editTagPane" layoutX="400.0" onMouseClicked="#editTag" visible="false">
                                  <children>
                                     <ImageView fitHeight="40.0" fitWidth="40.0">
                                        <image>
@@ -256,7 +256,7 @@
                                     <Font size="30.0" />
                                  </font>
                               </Label>
-                              <AnchorPane layoutX="400.0" onMouseClicked="#editPriority">
+                              <AnchorPane fx:id="editPriorityPane" layoutX="400.0" onMouseClicked="#editPriority" visible="false">
                                  <children>
                                     <ImageView fitHeight="40.0" fitWidth="40.0">
                                        <image>
@@ -297,7 +297,7 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="930.0" onMouseClicked="#editTitle">
+            <AnchorPane fx:id="editTitlePane" layoutX="930.0" onMouseClicked="#editTitle" visible="false">
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0">
                      <image>

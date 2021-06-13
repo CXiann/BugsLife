@@ -30,6 +30,7 @@ public class User2 extends javax.swing.JFrame {
         sendButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Chatroom (User2)");
 
         inputText2.setColumns(20);
         inputText2.setRows(5);
