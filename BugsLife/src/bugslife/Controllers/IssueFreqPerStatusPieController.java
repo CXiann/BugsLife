@@ -62,7 +62,7 @@ public class IssueFreqPerStatusPieController implements Initializable {
             data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    label.setText(Integer.toString((int) data.getPieValue()) + " Issue(s)(" + (data.getPieValue() / total * 100) + "%), Total issue(s) = " + total);
+                    label.setText(Integer.toString((int)data.getPieValue())+" Issue(s)("+(String.format("%.2f",(data.getPieValue() / total * 100)))+"%), Total issue(s) = "+total);
                 }
             });
         }
